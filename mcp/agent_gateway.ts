@@ -1,6 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { GoogleGenAI } from '@google/genai';
+import { execSync } from 'child_process';
 
 const app = express();
 app.use(express.json());
@@ -16,7 +17,7 @@ app.get('/.well-known/agent-card.json', (req: Request, res: Response) => {
     endpoint: `http://localhost:${PORT}/api/v1/mcp`,
     payment_token: "USDC",
     accepted_rails: ["x402-Base", "x402-Solana"],
-    capabilities: ["code_synthesis", "telemetry_parsing"],
+    capabilities: ["code_synthesis", "telemetry_parsing", "inverse_royalty_settlement"],
     trust_verification: "SHA256_ATTESTED"
   });
 });
@@ -34,9 +35,18 @@ app.post('/api/v1/mcp', async (req: Request, res: Response) => {
     });
   }
 
-  const { query } = req.body;
+  const { query, amount_usdc = 0.05 } = req.body;
 
-  // Mock / Local Fallback Mode if no valid API Key is set
+  // Process transaction through Python SQLite Inverse Splitter Daemon
+  let splitResult = { status: "SPLIT_PENDING" };
+  try {
+    const pythonCmd = `python3 -c "from daemons.daemon_inverse_splitter import PersistentInverseSplitter; s = PersistentInverseSplitter(); print(s.process_transaction('${paymentHeader}', ${amount_usdc}))"`;
+    const output = execSync(pythonCmd).toString().trim();
+    splitResult = JSON.parse(output.replace(/'/g, '"'));
+  } catch (err: any) {
+    console.error("[GATEWAY SPLIT ERROR]", err.message);
+  }
+
   if (!apiKey || apiKey === 'demo_key') {
     return res.json({
       status: "SUCCESS",
@@ -44,7 +54,8 @@ app.post('/api/v1/mcp', async (req: Request, res: Response) => {
       node_id: NODE_ID,
       m2m_settlement: "VERIFIED",
       proof_reference: paymentHeader,
-      result: `[ANAV M2M GATEWAY] Executed query: "${query || 'Ping telemetry status'}". Node operational under 24-Hour Sprint Deference routing.`
+      financial_split: splitResult,
+      result: `[ANAV M2M GATEWAY] Executed query: "${query || 'Ping telemetry status'}". Inverse split logged.`
     });
   }
 
@@ -60,6 +71,7 @@ app.post('/api/v1/mcp', async (req: Request, res: Response) => {
       mode: "LIVE_GEMINI_SYNTHESIS",
       node_id: NODE_ID,
       m2m_settlement: "VERIFIED",
+      financial_split: splitResult,
       result: response.text
     });
   } catch (err: any) {

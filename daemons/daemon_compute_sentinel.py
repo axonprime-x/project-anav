@@ -1,24 +1,24 @@
 import time
 import psutil
+import threading
+from daemons.daemon_ledger_gossip import LedgerGossipDaemon
 
-class ComputeSentinelDaemon:
-    def __init__(self, thermal_threshold=80.0, vram_threshold=85.0):
-        self.thermal_threshold = thermal_threshold
-        self.vram_threshold = vram_threshold
+def run_gossip_loop():
+    gossip = LedgerGossipDaemon()
+    gossip.log_transaction("genesis_m2m_001", 0.05, "master_node", "sprint_node")
+    while True:
+        gossip.sync_peers()
+        time.sleep(15)
 
-    def inspect_resources(self):
+if __name__ == "__main__":
+    print("[COMPUTE SENTINEL] Background daemon worker starting...")
+    
+    # Start Gossip Loop thread
+    gossip_thread = threading.Thread(target=run_gossip_loop, daemon=True)
+    gossip_thread.start()
+
+    while True:
         cpu_usage = psutil.cpu_percent(interval=1)
         mem = psutil.virtual_memory()
         print(f"[SENTINEL MONITOR] CPU Load: {cpu_usage}% | RAM Usage: {mem.percent}%")
-        
-        if cpu_usage > self.thermal_threshold:
-            print("[SENTINEL ALERT] Load high. Offloading burst compute to DePIN network...")
-            return {"action": "OFFLOAD_DEPIN", "status": "ACTIVE"}
-        return {"action": "LOCAL_EXECUTION", "status": "OPTIMAL"}
-
-if __name__ == "__main__":
-    sentinel = ComputeSentinelDaemon()
-    print("[COMPUTE SENTINEL] Background daemon loop started.")
-    while True:
-        sentinel.inspect_resources()
         time.sleep(10)

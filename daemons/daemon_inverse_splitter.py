@@ -1,44 +1,35 @@
-import json
+class DirectInverseSplitter:
+    def __init__(self, upfront_paid_pct, recoup_target=1500.00):
+        self.upfront_paid_pct = upfront_paid_pct  # e.g., 0.10 for 10%
+        self.union_take_rate = 1.0 - upfront_paid_pct # P + R = 100%
+        self.recoup_target = recoup_target
+        self.total_recouped = 0.0
+        self.subscription_active = False
 
-class InverseSplitterEngine:
-    def __init__(self, cap_target_usd: float = 1500.0, yearly_sub_usd: float = 399.0):
-        self.cap_target = cap_target_usd
-        self.yearly_sub = yearly_sub_usd
+    def process_m2m_transaction(self, gross_amount_usdc):
+        if self.subscription_active:
+            # Post-recoup: 0% Union royalty, node keeps 100% (pays $399/yr sub)
+            return {"node_payout": gross_amount_usdc, "union_royalty": 0.0, "status": "ANNUAL_SUBSCRIPTION_ACTIVE"}
 
-    def calculate_split(self, upfront_paid_usd: float, total_recouped_usd: float):
-        if total_recouped_usd >= self.cap_target:
-            return {
-                "union_take_rate": 0.0,
-                "entrant_take_rate": 1.0,
-                "status": "CAP_REACHED_YEARLY_SUB_ACTIVE"
-            }
+        union_share = gross_amount_usdc * self.union_take_rate
+        node_share = gross_amount_usdc * self.upfront_paid_pct
 
-        p_fraction = min(1.0, max(0.0, upfront_paid_usd / self.cap_target))
-        union_take_rate = 1.0 - p_fraction
-        entrant_take_rate = p_fraction
+        self.total_recouped += union_share
 
-        return {
-            "union_take_rate": union_take_rate,
-            "entrant_take_rate": entrant_take_rate,
-            "status": "RECOUPING_KIT_BALANCE"
-        }
-
-    def process_tx(self, tx_usdc: float, upfront_paid: float, current_recouped: float):
-        split = self.calculate_split(upfront_paid, current_recouped)
-        union_cut = tx_usdc * split["union_take_rate"]
-        entrant_cut = tx_usdc * split["entrant_take_rate"]
-        new_recouped_total = min(self.cap_target, current_recouped + union_cut)
+        if self.total_recouped >= self.recoup_target:
+            self.subscription_active = True
+            print(f"[INVERSE SPLITTER] Recouping Target of ${self.recoup_target} MET! Transitioning to $399/yr subscription tier.")
 
         return {
-            "tx_amount_usdc": tx_usdc,
-            "status": split["status"],
-            "union_cut_usdc": round(union_cut, 4),
-            "entrant_cut_usdc": round(entrant_cut, 4),
-            "updated_total_recouped_usdc": round(new_recouped_total, 4)
+            "node_payout": round(node_share, 4),
+            "union_royalty": round(union_share, 4),
+            "total_recouped_so_far": round(self.total_recouped, 2),
+            "remaining_to_cap": max(0.0, round(self.recoup_target - self.total_recouped, 2))
         }
 
 if __name__ == "__main__":
-    engine = InverseSplitterEngine()
-    # Test case: Entrant paid 10% down ($150), Union takes 90%
-    res = engine.process_tx(tx_usdc=25.0, upfront_paid=150.0, current_recouped=100.0)
-    print(json.dumps(res, indent=2))
+    # Test case: 10% upfront payment ($150) -> Union keeps 90% until $1,500 recouped
+    splitter = DirectInverseSplitter(upfront_paid_pct=0.10)
+    print("--- INVERSE ROYALTY SIMULATION ($P + R = 100%) ---")
+    result = splitter.process_m2m_transaction(100.00)
+    print(f"$100 Transaction Split: {result}")

@@ -1,53 +1,43 @@
-import asyncio
-import hashlib
-import json
 import time
-from typing import List, Dict, Any
+import requests
+import json
+import hashlib
 
 class LedgerGossipDaemon:
-    def __init__(self, node_id: str = "node_master_01"):
+    def __init__(self, node_id="node_master_01", peer_urls=None):
         self.node_id = node_id
-        self.ledger: List[Dict[str, Any]] = []
-        self._init_genesis()
+        self.peer_urls = peer_urls or ["http://mcp-gateway-sprint:5002/.well-known/agent-card.json"]
+        self.ledger = []
 
-    def _hash(self, index: int, prev_hash: str, timestamp: float, data: Dict[str, Any]) -> str:
-        payload = f"{index}{prev_hash}{timestamp}{json.dumps(data, sort_keys=True)}"
-        return hashlib.sha256(payload.encode()).hexdigest()
-
-    def _init_genesis(self):
-        genesis_data = {"type": "GENESIS", "protocol": "ANAV_MESH_V1"}
-        genesis_hash = self._hash(0, "0", 0.0, genesis_data)
-        self.ledger = [{
-            "index": 0,
-            "prev_hash": "0",
-            "timestamp": 0.0,
-            "data": genesis_data,
-            "hash": genesis_hash,
-            "origin": self.node_id
-        }]
-
-    def record_tx(self, tx_type: str, payload: Dict[str, Any]):
-        last_block = self.ledger[-1]
-        index = len(self.ledger)
-        timestamp = time.time()
-        block_data = {"tx_type": tx_type, "payload": payload}
-        block_hash = self._hash(index, last_block["hash"], timestamp, block_data)
-        
-        block = {
-            "index": index,
-            "prev_hash": last_block["hash"],
-            "timestamp": timestamp,
-            "data": block_data,
-            "hash": block_hash,
-            "origin": self.node_id
+    def log_transaction(self, tx_id, amount_usdc, sender, recipient):
+        tx_data = {
+            "tx_id": tx_id,
+            "amount_usdc": amount_usdc,
+            "sender": sender,
+            "recipient": recipient,
+            "timestamp": time.time()
         }
-        self.ledger.append(block)
-        return block
+        tx_hash = hashlib.sha256(json.dumps(tx_data, sort_keys=True).encode()).hexdigest()
+        entry = {"hash": tx_hash, "data": tx_data}
+        self.ledger.append(entry)
+        print(f"[{self.node_id} GOSSIP] Recorded TX: {tx_hash[:10]}... | {amount_usdc} USDC")
+        return entry
+
+    def sync_peers(self):
+        for peer in self.peer_urls:
+            try:
+                res = requests.get(peer, timeout=2)
+                if res.status_code == 200:
+                    peer_card = res.json()
+                    print(f"[{self.node_id} GOSSIP] Peer reachability verified: {peer_card.get('name')}")
+            except Exception as e:
+                print(f"[{self.node_id} GOSSIP] Peer sync attempt failed for {peer}: {e}")
 
 if __name__ == "__main__":
     gossip = LedgerGossipDaemon()
-    new_block = gossip.record_tx(
-        tx_type="INVERSE_ROYALTY_SETTLED",
-        payload={"tx_usdc": 25.0, "union_cut": 22.5, "entrant_cut": 2.5}
-    )
-    print(json.dumps(new_block, indent=2))
+    print("[GOSSIP DAEMON] Anti-Entropy P2P Gossip Loop Active.")
+    # Log initial seed block
+    gossip.log_transaction("genesis_sprint_tx_001", 0.05, "master_node", "sprint_node")
+    while True:
+        gossip.sync_peers()
+        time.sleep(15)

@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/mnt/c/Users/casha/project-anav/daemons/daemon_global_x402_ingress.py", line 100, in <module>
+    run_server()
+    ~~~~~~~~~~^^
+  File "/mnt/c/Users/casha/project-anav/daemons/daemon_global_x402_ingress.py", line 95, in run_server
+    httpd = ReusableHTTPServer(server_address, GlobalX402IngressHandler)
+  File "/usr/lib/python3.14/socketserver.py", line 457, in __init__
+    self.server_bind()
+    ~~~~~~~~~~~~~~~~^^
+  File "/mnt/c/Users/casha/project-anav/daemons/daemon_global_x402_ingress.py", line 13, in server_bind
+    self.socket.bind(self.server_address)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^
+OSError: [Errno 98] Address already in use

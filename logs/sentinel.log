@@ -1,0 +1,1120 @@
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851651.847812,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851682.085724,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851712.2821522,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851742.4234557,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851772.597513,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851802.7182243,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851832.863886,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851862.9944532,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851893.1148386,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851923.2253852,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851953.3361487,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793851983.4509676,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852013.580828,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852043.7193053,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852073.8349605,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852103.9517188,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852134.0749676,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852164.2055044,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852194.3194404,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852224.4280965,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852254.536807,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852284.8716905,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852534.3945608,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852564.5792725,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852594.7883334,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852624.9547698,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852655.206355,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852685.3288598,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852715.4479737,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852745.5719635,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852775.6901846,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852805.814822,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852835.9280548,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852866.046697,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852896.2092288,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852926.3254008,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852956.4419723,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793852986.5599685,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853016.6718082,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853046.795812,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853076.912662,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853107.029561,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853137.1415856,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853167.2630298,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853197.3756633,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853227.4870188,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853257.6012266,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853287.7058578,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853317.8154259,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853348.0152838,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853378.1969328,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853408.3853447,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853438.5784957,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853468.7881331,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853499.0080094,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853529.1922266,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853559.3884194,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853589.59491,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853619.7982361,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853649.9762273,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853680.107161,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853710.2795959,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853740.4743147,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853770.944265,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853801.2066686,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853831.4983008,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853861.7355788,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853892.0177824,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853922.3412862,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853952.7719293,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793853983.0186222,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854013.2366464,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854043.422781,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854073.6116757,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854103.7917342,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854133.9688811,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854164.245051,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854194.4305089,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854224.630089,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854254.8439453,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854285.0611036,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854315.2572324,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854345.42233,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854375.6007497,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854405.7811124,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854435.98864,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854466.1850932,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854496.37565,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854526.571996,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854556.8054173,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854587.018274,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854617.2652552,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854647.5117764,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854677.7232912,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854708.0087643,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854738.2281907,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854768.4720533,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854798.7546318,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854828.9866712,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854859.238912,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854889.4572,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854919.6349306,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854949.9488738,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793854980.1709511,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855010.3687973,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855040.5461679,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855070.743476,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855100.9288516,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855131.2313566,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855161.4907904,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855191.7942462,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855222.0429368,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855252.3192172,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855282.5515683,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855312.7131763,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855342.9147942,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855373.1041632,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855403.3677413,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855433.5415354,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855463.7538757,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855494.0164711,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855524.2344134,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855554.42472,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855584.6440837,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855614.918842,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855645.1452043,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855675.3428295,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855705.533702,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855735.7300916,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855766.024541,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855796.200045,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855826.397695,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855856.6055334,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855886.8298674,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855917.0198617,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855947.67775,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793855978.0970538,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793856008.3230863,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793856038.6382134,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}
+[COMPUTE SENTINEL] Active. Monitoring hardware resource thresholds...
+{
+  "timestamp": 1793856068.857175,
+  "gpu_temp_c": 68.5,
+  "load_pct": 78.2,
+  "sentinel_status": "LOCAL_EXECUTION_OPTIMAL",
+  "depin_spot_target": null
+}

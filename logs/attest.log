@@ -1,0 +1,568 @@
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793851651.8347661,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "734784fd8246c99d07848c41d3d0a9f79886c585cb3214f39cfa8c7c80849546",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793851712.0496945,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "95a767745c203df9cc57e43f3a582dcdb4fa9a98f68536082a101af897927961",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793851772.2038896,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "3f0ba7e7d41e7a009da840f766c5ef3a0a90c7105adc0f7111a67046828b9df3",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793851832.3328779,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "c632976b0537158077efb45c85fec6ded79892ad91e571ff6d8ac4f489451819",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793851892.47471,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "48b642d55b0f4610f9ce97c504959e4d5b499a5bffe972c47116d84f3493e8df",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793851952.584103,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "74ce68d9d0a76d587b8c8e56b342080c57176a9c65e1ea73acc6e7edaee5f085",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852012.6965876,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "99f7de035c39885db1e5450f18473fb774b2a25ad492f9cd9b093696c6c6c69c",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852072.8077748,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "3aad32da75f45c5626e294919f36e02c800fc4e51ae313e1824f343625f5e088",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852132.9046805,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "6a06d13c92f2dcd2a3ff5921ca5ac32bbdf997ccc24bd451323c5d1f21394218",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852193.012243,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "9b26ecead0583a6bfa55f0ad9eea408e39a277db64c858e3bdb0971c6f848347",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852253.1056967,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "d8fc1310aafb5e54169e765c3b6fa0baf84a961311e811f3081f729659e7dd12",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852533.3888965,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "98cd56f6acedda2b8a58f3b349a0020fc17db75d9652bb13105225eda06a499a",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852593.6910648,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "9b1cfa15ff2c3faf934869d96522990797e06f8900de5b3767f9f129d192cc71",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852654.2996838,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "738a59e14cc570a88294d651231d0aa52501b38b246a0ba4e92c841f338477da",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852714.513566,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "bde02d49a42e2a7a7c9cfbe80ced9b57b7f380613892c45f5cc297e6a7592eb9",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852774.6246626,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "1be143da6355affcc16c1f393ab07715f8b51d7f71f674060c39b9f7d5cd281b",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852834.734032,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "efe1531a0fb158eb114fc6c6ec48bbf9336ed9714cb9ff0f60715d8d2f598e29",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852894.848497,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "d64b975d0456ef66aed7a41a8b4e66ef9fa691cebb1ab33af9ba6065598059fa",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793852954.9842734,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "4259052e02eadf111a15e69f036f3e1025776e75dffaaaf886729094036117b1",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853015.1031003,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "fd0912a7d561590ae9866f60d06dd5d336e6db33092c1377b13384739a59fd23",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853075.2040002,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "50f067ec5049299896937194f53c946253680990923a7f0ce86abe34e5e0fe22",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853135.3096151,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "eecc5db0438671cd2cb7d5185af51c5585b21bd2acae50228f155213e5e1f70a",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853195.414898,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "b2ff05355c177c6268482ba6d4b55243e44e5932044353f7ba40c5bce52a9ecb",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853255.5229967,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "f31a154b4a817db1764001b3dca763c9174e3bb4771443c56d3912ca20fba85f",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853315.629432,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "f0e68042a97ce9181f3545170302b53242339a25736ab1722093eb780889750a",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853375.7971528,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "72ce80dff75621286e2704c2778238e3383d86b4b7bbb0bbcd90175d90c4e645",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853435.964633,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "c22e453696879c48d122f29b2f5e9253a80a5f2ef4a5d6efeeb9da8c485db427",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853496.1632318,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "d24076fa7a3e15b0e7627ed2b0f45d0aa1d5d2b6bffe24912ff0e443700daeda",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853556.3440084,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "cb53a1593df9d61d72c01a3aa6741dea1d969097309bcd25045ba8416dae9959",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853616.539751,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "8fdb989359def6de304fc72a4203d6a458b222e40fa57fbee4c171fcf041bc83",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853676.7215304,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "9c2fb04624a34c0d0ba091fc96739f3233b4e7092684021960107e43e547fd3c",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853736.9084272,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "1f98d43360b7933c46a616a0e57f49f07add417b996faa44182d72d94da331a9",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853797.215742,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "c280ba4287ae2c64346d06a747bc114a7651e88c570c5bd708589155b80a3665",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853857.5275567,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "ee4f54ed3b0ed1f8f3a381f167233afa1ab018c4e1d27bc5a0db5a49a6d8d6f1",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853918.025876,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "0448c13f6c8a110ba4e0520a88d67c410ed86889da25fb42be123b5ce5bf6a5b",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793853978.3008137,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "622ea51e9a3d2cf9eb0525c0a4e8c0f1cbc6848baa03d85763e82a0051764e00",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854038.5069196,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "969e828c9d2f873c2b5c5976918811de5d4885f6a1362c5db0737d1cde7c30f7",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854098.7027965,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "36c70fd6afd858eee68bf630ad43af371952aca4bd732828faa0bce6319d92e5",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854158.8789382,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "19b654b609ce25413c2a1ac841b44c3551c82e14f3308a0701c373556c5f3b50",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854219.081222,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "d480c9ad120f2690b588dc8f3fc0eb905247a3062b14bfa148e2171b03e43934",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854279.2679353,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "eaeff8dc6877e121812984846620d53df2e3a9732c02099756ff10159679119e",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854339.4494905,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "c58a37099cb83babbeceff6441a07bc7f1b14b9ce8cb40c2799bf2f4557a1418",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854399.6061974,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "2d575e196906d72fc24bb6161c7f0f81ee038cb4daebd399a5427e23c8ecc7f7",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854459.7872348,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "a20976f7e9bf37c2d0d49d7669a7a5db02557dc146eb5ac93b73bf2a02f89693",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854519.9846532,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "53149a3ce62e1d3dcfdd8e2e5e20b9600076de5a4ef18967c1dde2739d713c0e",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854580.2441802,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "e0590f339bf7bac83fa0331be29a7ccd0c374c2d474dbd6701afdc75d3212019",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854640.524224,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "ccc0a4f5d7202b9a2435afccafeec11c955c39ce9794741042d9de487e321180",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854700.825894,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "829a288b88470bb476fc71c11518079b395a934c3591e2202710dbaa06d17c3e",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854761.0633998,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "32d79d856b629cd022e311d8bc0aa18b5880385eef155050544251f3cdbda322",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854821.2946064,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "6fd1445a92859aee06364ccc38f4757fbfd10617896fdbf2e9c49b0d5d9d63bf",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854881.539688,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "7ebc9ad596b32891ff37a8636a0ea892ab5b9babbc9f3c6972fe35605147f7c9",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793854941.7615216,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "5f54294ef2cd548480cfa1d0cdc0645bc8ff8aa9445742fee6ebdecd59afc956",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855001.9348423,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "7d5f856704451d5d61aafc9c8ad88814b43e67c54eaebff8284b97f6f90132f4",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855062.1084254,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "1af46ff47626001d0eef5532b73e2a2cb97047a40e2c797738315f067d098cc3",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855122.3278856,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "dec98488bc24238a25ce70ec46778e5b6348cb0a2a5404799c172f32710616d7",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855182.7541964,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "3ebc619d435f348573218384697eefd8b7c8812e68934abb7094ce8f9a95fb1b",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855243.018116,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "1e2d3724939dabb7da783e6c080bf1c456e84731612b0a33926cdb48677342e6",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855303.2245853,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "7caee4802f9308485e02972f507ce46612923b09a480247f7f6f338b2d28de16",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855363.3707747,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "f0e762fe049992b6fe84490e0323510a84b1beeee126d86a0e99b9465445eb3a",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855423.5859253,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "62f1351f576ef2e487a9901fbcecffb93673eccb985e8bb051b461b191e4de71",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855483.8611526,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "f231f62236836fd1e49a2a23076f9a0a626c1505605d4286ab6c0677b78adad3",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855544.0525315,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "1bafba2f3b7d9553c46b1e613dc08d388222854974c8a90ebe5452b350e8cb66",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855604.28791,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "edb069fe70412917e6baddbde113e07f0deb9a31e3603889ffdc211284f04cd5",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855664.4691532,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "3ca8ddfd55647323454e6f59e4c5f5e2f546e0ee82fd074545d33f67c7fc584e",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855724.7039783,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "9588c651ec3778b6e62373ff7243bddb5727edf8b21dedfa8dab6384ce8c70bb",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855784.854674,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "60cd5d49e93c0b01ad63d7a2add3d452c9ba3bee68db43f7e3d305e593a5ab72",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855845.061294,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "4cd2620ad14938755044b3da4c6c566452b281b929d55e87f877164c1f42bce5",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855905.275869,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "d408acdc6fb894f85d52afb46085343040677d60948e25978faf1c500b5981ef",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793855965.4912694,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "05a6ac04aa9dcf53c275d6f7b0b97e4f2762cbb6db81d85c83e2145acd680108",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793856025.6919284,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "ec04319dba9d1730d872de100e6270dcb3e082f17d1f148f4f41fdc6249d1986",
+  "status": "TEE_ATTESTED_VALID"
+}
+[ATTEST GUARD] Initialized cryptographic attestation generator.
+{
+  "node_id": "node_master_01",
+  "timestamp": 1793856085.9249592,
+  "erc_standard": "ERC-8004",
+  "attestation_proof": "627ef5008ad68e8f03cad17c83785fa93e6b163048fc708d9eb8c0eacc1ecf3b",
+  "status": "TEE_ATTESTED_VALID"
+}

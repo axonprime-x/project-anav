@@ -1,14 +1,29 @@
 services:
-  mcp-gateway:
+  # Established Master Node Gateway
+  mcp-gateway-master:
     build: .
-    container_name: anav-agent-gateway
+    container_name: anav-master-gateway
     restart: always
     ports:
       - "5001:5001"
-    env_file:
-      - .env
+    environment:
+      - PORT=5001
+      - NODE_ID=node_master_01
     command: ["npx", "tsx", "mcp/agent_gateway.ts"]
 
+  # Newbie "Anav" Node Gateway (In 24-Hour Sprint)
+  mcp-gateway-sprint:
+    build: .
+    container_name: anav-sprint-gateway
+    restart: always
+    ports:
+      - "5002:5002"
+    environment:
+      - PORT=5002
+      - NODE_ID=node_anav_sprint
+    command: ["npx", "tsx", "mcp/agent_gateway.ts"]
+
+  # Background Compute Sentinel & Gossip Worker
   daemons-worker:
     build: .
     container_name: anav-daemons-worker

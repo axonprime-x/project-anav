@@ -1,0 +1,22 @@
+services:
+  mcp-gateway:
+    build: .
+    container_name: anav-agent-gateway
+    restart: always
+    ports:
+      - "5001:5001"
+    env_file:
+      - .env
+    command: ["npx", "tsx", "mcp/agent_gateway.ts"]
+
+  daemons-worker:
+    build: .
+    container_name: anav-daemons-worker
+    restart: always
+    env_file:
+      - .env
+    command: ["python3", "daemons/daemon_compute_sentinel.py"]
+
+networks:
+  default:
+    name: anav-mesh-network

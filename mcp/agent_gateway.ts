@@ -5,7 +5,7 @@ import { GoogleGenAI } from '@google/genai';
 const app = express();
 app.use(express.json());
 
-const PORT = process.env.PORT || 5001;
+const PORT = Number(process.env.PORT) || 5001;
 const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || 'demo_key' });
 
 app.get('/.well-known/agent-card.json', (req: Request, res: Response) => {
@@ -51,12 +51,12 @@ app.post('/api/v1/mcp', async (req: Request, res: Response) => {
   }
 });
 
-app.listen(PORT, () => {
+app.listen(PORT, '0.0.0.0', () => {
   printNodeInfo(PORT);
 });
 
-function printNodeInfo(port: any) {
-  console.log(`[ANAV AGENT GATEWAY] Listening on port ${port}`);
+function printNodeInfo(port: number) {
+  console.log(`[ANAV AGENT GATEWAY] Listening on 0.0.0.0:${port}`);
   console.log(`  ├─ Agent Card: http://localhost:${port}/.well-known/agent-card.json`);
   console.log(`  └─ x402 Endpoint: http://localhost:${port}/api/v1/mcp`);
 }

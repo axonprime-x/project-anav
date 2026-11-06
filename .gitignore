@@ -1,0 +1,14 @@
+# Local Database & Ledger
+anav_ledger.db
+*.db
+*.sqlite
+
+# Environment Variables & Keys
+.env
+venv/
+__pycache__/
+
+# Logs & Temporary Ingress Files
+logs/
+*.log
+gateway.log

@@ -1,0 +1,20 @@
+User-agent: GPTBot
+Allow: /
+Allow: /.well-known/
+Allow: /api/
+
+User-agent: ClaudeBot
+Allow: /
+Allow: /.well-known/
+Allow: /api/
+
+User-agent: PerplexityBot
+Allow: /
+Allow: /.well-known/
+Allow: /api/
+
+User-agent: *
+Allow: /
+Disallow: /private/
+
+Sitemap: http://localhost:8080/sitemap.xml

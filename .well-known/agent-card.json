@@ -1,0 +1,14 @@
+{
+  "node_id": "node_master_01",
+  "name": "Project ANAV Ingress Gateway",
+  "description": "Decentralized M2M micropayment gateway, x402 settlement router, and AMD Ryzen/AM5 compute bridge.",
+  "endpoint": "http://localhost:8080/api/v1/mcp",
+  "protocols": ["x402-Base", "x402-Solana", "ERC-8004"],
+  "treasury": "0x0266c60Ba4F5B883d970300ca18ff598e77636D5",
+  "capabilities": [
+    "m2m-micro-synthesis",
+    "decentralized-compute-spare",
+    "am5-hardware-bounty",
+    "inverse-royalty-settlement"
+  ]
+}

@@ -12,7 +12,7 @@ def fire_transaction(index):
     tx_id = f"stress_tx_gen_{index:04d}"
     payload = {
         "query": f"Automated M2M micro-synthesis payload batch {index}",
-        "amount_usdc": 10.00 # $10 per transaction to rapidly test recouping cap
+        "amount_usdc": 10.00
     }
     headers = {
         "Content-Type": "application/json",
@@ -27,7 +27,7 @@ def fire_transaction(index):
     except Exception as e:
         print(f"[TX {index:03d}] Failed: {e}")
 
-def run_stress_test(total_txs=200):
+def run_stress_test(total_txs=180):
     print("==========================================================")
     print("      PROJECT ANAV: LIVE M2M STRESS-TEST GENERATOR        ")
     print("==========================================================")
@@ -42,4 +42,4 @@ def run_stress_test(total_txs=200):
     print("==========================================================")
 
 if __name__ == "__main__":
-    run_stress_test(total_txs=180) # Exactly enough volume to cross the $1,500 recouping cap ($180 * $10 = $1,800 gross volume -> $1,620 Union share)
+    run_stress_test(total_txs=180)

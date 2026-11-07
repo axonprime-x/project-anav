@@ -1,5 +1,5 @@
 # Project ANAV // Multi-Network Exposition & Integration Matrix
-Author: Isayah Griffin (CEO, Aperture Contracting Services LLC)
+Author: Anav Tebah (CEO, Anav Tebah)
 Date: November 7, 2026
 
 ## Objective

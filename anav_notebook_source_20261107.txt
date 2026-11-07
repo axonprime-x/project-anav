@@ -1,6 +1,6 @@
 Project ANAV // Sovereign DePIN Architecture & Systemic Roadmap
 Date: November 7, 2026
-Author: Isayah Griffin (CEO, Aperture Contracting Services LLC)
+Author: Anav Tebah (CEO, Anav Tebah)
 
 [Phase 1: Distributed Load-Balancing & Compute Offloading (Off-Host Divergence)]
 1.1 Ingress Gatekeeper Re-routing: Intercept incoming heavy compute payloads at gateway_ingress.py and immediately divert off local MSI hardware to unutilized peer nodes in the mesh.

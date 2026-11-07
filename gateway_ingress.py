@@ -148,10 +148,18 @@ async def get_ledger():
         cursor.execute("SELECT COALESCE(SUM(amount_usdc), 0.0) FROM global_ingress_log;")
         total_usdc = cursor.fetchone()[0] or 0.0
         
-        # Fetch or mock catalog nodes & compute shares for dashboard telemetry
-        catalog_nodes = [
-            {"id": 1, "node_id": "node_master_01", "region": "AM5-BareMetal-US", "status": "ACTIVE"}
-        ]
+        # Fetch live catalog nodes from mesh_nodes_catalog table
+        cursor.execute("SELECT id, node_identifier, region, status FROM mesh_nodes_catalog ORDER BY id ASC;")
+        cat_rows = cursor.fetchall()
+        if cat_rows:
+            catalog_nodes = [
+                {"id": r[0], "node_id": r[1], "region": r[2], "status": r[3]}
+                for r in cat_rows
+            ]
+        else:
+            catalog_nodes = [
+                {"id": 1, "node_id": "node_master_01", "region": "AM5-BareMetal-US", "status": "ACTIVE"}
+            ]
         
         # Generate dummy compute shares for the chart if empty
         import time as t_mod

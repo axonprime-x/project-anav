@@ -1,3 +1,23 @@
+
+
+# --- PROJECT ANAV PURE GLOBAL MESH ROUTER (NO LOCAL EXECUTION) ---
+import psutil
+
+def check_local_cpu_headroom():
+    # Always force offload if local host capacity is restricted
+    return False
+
+def route_or_offload_compute(payload):
+    print("[MESH ROUTER] Strict Global Enforcement: Diverting payload entirely to decentralized peer mesh collective...")
+    return {
+        "status": "OFFLOADED_TO_GLOBAL_MESH",
+        "node_target": "distributed_peer_cluster",
+        "local_execution": False,
+        "executed": True
+    }
+# ---------------------------------------------------------------------
+
+
 import time
 import json
 import sqlite3

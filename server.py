@@ -35,6 +35,35 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
         parsed_path = urlparse(self.path)
         path = parsed_path.path
 
+        if path == '/api/global-transactions':
+            import sqlite3, json
+            try:
+                conn = sqlite3.connect('anav_ledger.db')
+                cursor = conn.cursor()
+                cursor.execute('SELECT id, timestamp, proof, amount_usdc, payload FROM global_ingress_log ORDER BY id DESC LIMIT 50;')
+                rows = []
+                for r in cursor.fetchall():
+                    try:
+                        p = json.loads(r[4])
+                    except:
+                        p = {'raw': r[4]}
+                    rows.append({'id': r[0], 'timestamp': r[1], 'proof': r[2], 'amount_usdc': r[3], 'payload': p})
+                conn.close()
+                body_bytes = json.dumps(rows).encode('utf-8')
+                self.send_response(200)
+                self.send_header('Content-Type', 'application/json; charset=utf-8')
+                self.send_header('Access-Control-Allow-Origin', '*')
+                self.end_headers()
+                if body:
+                    self.wfile.write(body_bytes)
+                return
+            except Exception as e:
+                self.send_response(500)
+                self.end_headers()
+                if body:
+                    self.wfile.write(json.dumps({'error': str(e)}).encode('utf-8'))
+                return
+
         if path == '/' or path == '/anav_dashboard.html':
             if os.path.exists('anav_dashboard.html'):
                 self.send_response(200)

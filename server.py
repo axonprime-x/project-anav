@@ -122,3 +122,19 @@ def run_hud_server(port=8080):
 
 if __name__ == '__main__':
     run_hud_server()
+
+@app.route('/api/global-transactions')
+def api_global_transactions():
+    import sqlite3, json
+    conn = sqlite3.connect('anav_ledger.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, timestamp, proof, amount_usdc, payload FROM global_ingress_log ORDER BY id DESC LIMIT 50;')
+    rows = []
+    for r in cursor.fetchall():
+        try:
+            p = json.loads(r[4])
+        except:
+            p = {'raw': r[4]}
+        rows.append({'id': r[0], 'timestamp': r[1], 'proof': r[2], 'amount_usdc': r[3], 'payload': p})
+    conn.close()
+    return json.dumps(rows)

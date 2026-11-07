@@ -1,0 +1,21 @@
+Project ANAV // Sovereign DePIN Architecture & Systemic Roadmap
+Date: November 7, 2026
+Author: Isayah Griffin (CEO, Aperture Contracting Services LLC)
+
+[Phase 1: Distributed Load-Balancing & Compute Offloading (Off-Host Divergence)]
+1.1 Ingress Gatekeeper Re-routing: Intercept incoming heavy compute payloads at gateway_ingress.py and immediately divert off local MSI hardware to unutilized peer nodes in the mesh.
+1.2 Self-Bootstrapping Peer Load Balancer: Implement a lightweight scoring daemon that evaluates incoming peer capacity (CPU spare %, memory, latency) and dynamically assigns workloads across the collective datacenter mesh.
+1.3 Local CPU Conservation Enforcer: Hard-cap local worker threads to prevent local CPU spikes above 20%, ensuring the host laptop remains stable and responsive.
+
+[Phase 2: Vault-Backed Onboarding & Liquidity Drafting (Inverse-Royalty / Mutual Credit)]
+2.1 Zero-Capital Entrant Onboarding: Allow new or under-capitalized nodes to ingest and execute tasks without upfront x402 payment proofs, bypassing hard 402 rejects via an onboarding token.
+2.2 Collective Vault Drafting: Configure a background daemon that monitors the central treasury vault (0x0266c60Ba4F5B883d970300ca18ff598e77636D5) and automatically drafts micro-advances to fund new nodes, bootstrapping their initial trade liquidity to compound mesh volume.
+
+[Phase 3: Unified Codebase Refactoring & Organic Integration]
+3.1 Protocol Header Unification: Replace fragmented header patches with a clean, unified middleware handler handling both raw x402 payment proofs and onboarding tokens.
+3.2 Single-Organism Initialization: Consolidate distributed daemons into a cohesive orchestration script that boots the ingress gateway, peer load balancer, and vault drafter as a single organism.
+
+[External DePIN & Agent Network Integration]
+- io.net DePIN Compute Bridge (daemons/daemon_ionet_bridge.py)
+- Vast.ai / Salad Cloud Spot-Market Scheduler (daemons/daemon_spot_scheduler.py)
+- Farcaster & Base Agent Registry Broadcaster (daemons/daemon_farcaster_publisher.py)

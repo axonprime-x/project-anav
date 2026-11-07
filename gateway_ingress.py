@@ -145,7 +145,7 @@ async def get_ledger():
         ]
         
         # Calculate total ingress USDC
-        cursor.execute("SELECT SUM(amount_usdc) FROM global_ingress_log;")
+        cursor.execute("SELECT COALESCE(SUM(amount_usdc), 0.0) FROM global_ingress_log;")
         total_usdc = cursor.fetchone()[0] or 0.0
         
         # Fetch or mock catalog nodes & compute shares for dashboard telemetry

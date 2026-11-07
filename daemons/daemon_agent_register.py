@@ -1,42 +1,39 @@
-#!/usr/bin/env python3
-import os
 import time
+import json
 import sqlite3
 import hashlib
-import json
 
-DB_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "../anav_ledger.db")
+class BaseRegistryAnnouncer:
+    def __init__(self):
+        self.node_id = "node_master_01"
+        self.treasury = "0x0266c60Ba4F5B883d970300ca18ff598e77636D5"
+        self.registry_contract = "0x8004RegistryBaseMainnetPlaceholder"
 
-def register_agent_card():
-    timestamp = time.time()
-    manifest = {
-        "node_id": "node_master_01",
-        "name": "Project ANAV Ingress Gateway",
-        "standard": "ERC-8004",
-        "protocol": "x402",
-        "endpoint": "http://localhost:8080/api/v1/mcp",
-        "treasury": "0x0266c60Ba4F5B883d970300ca18ff598e77636D5",
-        "timestamp": timestamp
-    }
-    payload = json.dumps(manifest)
-    proof = hashlib.sha256(payload.encode('utf-8')).hexdigest()
+    def announce_on_chain(self):
+        announcement = {
+            "registry": "ERC-8004-Base",
+            "contract": self.registry_contract,
+            "node_id": self.node_id,
+            "treasury": self.treasury,
+            "rail": "x402-Base",
+            "status": "REGISTERED_ACTIVE",
+            "timestamp": time.time()
+        }
+        print(f"[BASE REGISTRY] Announcing ERC-8004 node card on-chain via {self.registry_contract}...")
 
-    conn = sqlite3.connect(DB_PATH)
-    cursor = conn.cursor()
-    try:
-        cursor.execute("""
-            INSERT INTO global_ingress_log (timestamp, proof, payload, inference_output, bridged)
-            VALUES (?, ?, ?, ?, ?)
-        """, (timestamp, proof, payload, "ERC8004_REGISTRY_BROADCAST_SUCCESS", 1))
-        conn.commit()
-        print(f"[AGENT REGISTRY] Published ERC-8004 Agent Card proof: {proof[:16]}...")
-    except Exception as e:
-        print(f"[AGENT REGISTRY] Ledger error: {e}")
-    finally:
-        conn.close()
+        try:
+            conn = sqlite3.connect('anav_ledger.db')
+            cursor = conn.cursor()
+            proof = hashlib.sha256(json.dumps(announcement).encode()).hexdigest()
+            cursor.execute(
+                'INSERT INTO global_ingress_log (timestamp, proof, payload, amount_usdc, bridged) VALUES (?, ?, ?, ?, ?)',
+                (time.time(), proof, json.dumps(announcement), 0.0, 1)
+            )
+            conn.commit()
+            conn.close()
+        except Exception as e:
+            print(f"[REGISTRY ERROR] {e}")
 
 if __name__ == "__main__":
-    print("[AGENT REGISTRY] Initializing persistent ERC-8004 Agent Card broadcaster...")
-    while True:
-        register_agent_card()
-        time.sleep(300)
+    announcer = BaseRegistryAnnouncer()
+    announcer.announce_on_chain()

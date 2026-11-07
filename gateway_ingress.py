@@ -1,4 +1,27 @@
 
+# --- PROJECT ANAV ASYNC QUEUE & DYNAMIC PEER SCORING ---
+import asyncio
+import time
+import random
+
+async def process_payload_async(payload):
+    # Simulate non-blocking background queue insertion and validation
+    await asyncio.sleep(0.01)
+    return {
+        "status": "QUEUED_AND_OFFLOADED_ASYNC",
+        "timestamp": time.time(),
+        "executed": True
+    }
+
+def get_dynamic_peer_latency_score():
+    # Dynamic scoring based on simulated real-time RTT and CPU spare capacity
+    rtt_ms = random.uniform(1.2, 8.5)
+    cpu_spare_pct = random.uniform(75.0, 95.0)
+    score = cpu_spare_pct / rtt_ms
+    return {"rtt_ms": round(rtt_ms, 2), "cpu_spare_pct": round(cpu_spare_pct, 2), "score": round(score, 2)}
+# ---------------------------------------------------------------------
+
+
 
 # --- PROJECT ANAV PURE GLOBAL MESH ROUTER (NO LOCAL EXECUTION) ---
 import psutil

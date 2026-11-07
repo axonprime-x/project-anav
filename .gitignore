@@ -13,3 +13,7 @@ logs/
 *.log
 gateway.log
 anav_ledger.db
+
+*.db-wal
+*.db-shm
+*.db

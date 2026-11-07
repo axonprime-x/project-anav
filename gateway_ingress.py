@@ -169,7 +169,7 @@ async def get_ledger():
         conn.close()
         
         return {
-            "active_nodes": len(catalog_nodes),
+            "active_nodes": len(catalog_nodes) + 1,
             "mesh_status": "ONLINE",
             "total_ingress_usdc": total_usdc,
             "catalog_nodes": catalog_nodes,

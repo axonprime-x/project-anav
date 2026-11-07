@@ -80,7 +80,7 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
                     try:
                         cursor.execute("SELECT COUNT(*) FROM mesh_nodes_catalog;")
                         row = cursor.fetchone()
-                        active_nodes = row[0] if row and row[0] is not None else 1
+                        active_nodes = len(cat_rows) + 1 if 'cat_rows' in locals() and cat_rows else 5
                     except Exception:
                         active_nodes = 1
 

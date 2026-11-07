@@ -36,4 +36,6 @@ class BaseRegistryAnnouncer:
 
 if __name__ == "__main__":
     announcer = BaseRegistryAnnouncer()
-    announcer.announce_on_chain()
+    while True:
+        announcer.announce_on_chain()
+        time.sleep(300) # Re-announce every 5 minutes to keep registry heartbeat fresh

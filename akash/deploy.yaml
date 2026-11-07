@@ -1,0 +1,83 @@
+version: "2.0"
+
+services:
+  anav-ingress:
+    image: ghcr.io/axonprime-x/project-anav-ingress:latest
+    env:
+      - PYTHONUNBUFFERED=1
+      - PORT=5001
+    expose:
+      - port: 5001
+        as: 80
+        to:
+          - global: true
+
+  anav-hud:
+    image: ghcr.io/axonprime-x/project-anav-hud:latest
+    env:
+      - PYTHONUNBUFFERED=1
+      - PORT=8080
+    expose:
+      - port: 8080
+        as: 80
+        to:
+          - global: true
+
+  anav-worker:
+    image: ghcr.io/axonprime-x/project-anav-worker:latest
+    env:
+      - PYTHONUNBUFFERED=1
+
+profiles:
+  compute:
+    anav-ingress:
+      resources:
+        cpu:
+          units: 1.0
+        memory:
+          size: 1Gi
+        storage:
+          size: 5Gi
+    anav-hud:
+      resources:
+        cpu:
+          units: 1.0
+        memory:
+          size: 1Gi
+        storage:
+          size: 5Gi
+    anav-worker:
+      resources:
+        cpu:
+          units: 2.0
+        memory:
+          size: 2Gi
+        storage:
+          size: 10Gi
+
+  placement:
+    akash:
+      pricing:
+        anav-ingress:
+          denom: uakt
+          amount: 1000
+        anav-hud:
+          denom: uakt
+          amount: 1000
+        anav-worker:
+          denom: uakt
+          amount: 2000
+
+deployment:
+  anav-ingress:
+    akash:
+      profile: anav-ingress
+      count: 1
+  anav-hud:
+    akash:
+      profile: anav-hud
+      count: 1
+  anav-worker:
+    akash:
+      profile: anav-worker
+      count: 1

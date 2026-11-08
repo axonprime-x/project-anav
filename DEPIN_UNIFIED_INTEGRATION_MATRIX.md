@@ -1,22 +1,27 @@
 # Project ANAV // Unified Multi-Network DePIN Integration Matrix
 
-To optimize our global node exposition, decentralized discovery, and micro-incentive settlement liquidity across the decentralized AI and infrastructure landscape, Project ANAV integrates across three core DePIN layers alongside Akash:
+## 1. Executive Strategy & Optimization Objective
+To maximize external discovery, compute syndication, and sovereign M2M settlement speed, Project ANAV integrates with three core decentralized networks alongside Akash:
+1. **io.net:** High-throughput GPU compute aggregation for distributed AI inference and hardware pooling.
+2. **Vast.ai / Salad Cloud:** Spot-market container bridging and elastic worker scaling.
+3. **Farcaster & Base Agent Registries:** On-chain agent discovery, social graph telemetry, and instantaneous peer indexing.
 
 ---
 
-## 1. Network Ecosystem & Role Breakdown
-
-| Network / Protocol | Infrastructure Role | Integration Vector / Daemon | Exposition & Settlement Optimization |
+## 2. Multi-Network Integration Architecture & Routing
+| Network Target | Integration Layer | Protocol / Transport | Operational Status |
 | :--- | :--- | :--- | :--- |
-| **Akash Network** | Decentralized Cloud Container Hosting | `akash/deploy.yaml` | Censorship-resistant public ingress and HUD gateway hosting on global bare-metal validator nodes. |
-| **io.net DePIN** | Distributed GPU AI Cluster / Worker | `integration/ionet_worker.py` | Pools idle local and edge compute cycles into decentralized machine learning inference and training pools. |
-| **Vast.ai Spot-Market** | Spot-Market Compute Arbitrage | `integration/vastai_heartbeat.py` | Dynamic spot-market lease bidding and automated workload offloading for high-throughput micro-tasks. |
-| **Base L2 & x402** | Sovereign Settlement & Micropayments | `daemons/daemon_global_x402_ingress.py` | Instant stateless USDC settlement rails bypassing centralized payment friction. |
+| **Akash** | `GLOBAL_DEPIN_CLOUD` | Container Manifest (`deploy.yaml`) | `STAGED_ACTIVE` |
+| **io.net** | `GPU_COMPUTE_POOL` | MCP REST & Telemetry Stream | `ACTIVE_CLUSTER_SYNC` |
+| **Vast.ai** | `SPOT_WORKER_BRIDGING` | Heartbeat & Telemetry API | `LISTENING` |
+| **Farcaster & Base** | `AGENT_DIRECTORY_REGISTRY` | ERC-8004 Agent Card Broadcast | `BROADCASTING` |
 
 ---
 
-## 2. Execution & Telemetry Synchronization Loop
+## 3. Daemon Supervision & Automated Telemetry Sync
+All integration daemons operate continuously under `systemd` supervision with automated CRDT anti-entropy mesh healing:
+* `anav-ingress.service` (Port 5001 - Strict x402 enforcement)
+* `anav-beacon.service` (Global M2M Attraction & Registry Broadcast)
+* `anav-hud-server.service` (Port 8080 - Telemetry & Ledger Stream)
+* `anav-partition-healer.service` (Anti-Entropy Mesh Synchronization)
 
-To initialize and verify active heartbeats across all integrated DePIN networks and commit signed proofs to the local SQLite ledger:
-```bash
-python3 integration/multi_net_status.py

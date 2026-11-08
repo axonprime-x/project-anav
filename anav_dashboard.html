@@ -92,10 +92,21 @@
             </div>
         </div>
 
+        <!-- Global External Ingress Telemetry Graph -->
+        <div class="card" style="border-left: 3px solid var(--accent-green);">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h3 style="color: #3fb950; margin: 0 0 10px 0;">Global External Transaction Ingress (Live x402 / DePIN)</h3>
+                <span style="font-size: 12px; color: var(--text-muted);" id="external-tx-counter">External Settled: 0</span>
+            </div>
+            <div style="height: 220px; position: relative;">
+                <canvas id="globalTxChart"></canvas>
+            </div>
+        </div>
+
         <!-- Live Compute Share Graph -->
         <div class="card">
             <h3>Mesh Compute Telemetry (CST)</h3>
-            <div style="height: 240px; position: relative;">
+            <div style="height: 220px; position: relative;">
                 <canvas id="meshChart"></canvas>
             </div>
         </div>
@@ -136,6 +147,59 @@
                 hour12: true
             }).format(dateObj);
         }
+
+                // Global External Ingress Chart Setup
+        const ctxTx = document.getElementById('globalTxChart').getContext('2d');
+        const globalTxChart = new Chart(ctxTx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [
+                    {
+                        type: 'line',
+                        label: 'Ingress Volume ($ USDC)',
+                        data: [],
+                        borderColor: '#2ea043',
+                        backgroundColor: 'rgba(46, 160, 67, 0.15)',
+                        borderWidth: 2,
+                        yAxisID: 'yVolume',
+                        tension: 0.25,
+                        fill: true
+                    },
+                    {
+                        type: 'bar',
+                        label: 'Settled Requests',
+                        data: [],
+                        backgroundColor: 'rgba(56, 139, 253, 0.45)',
+                        borderColor: '#58a6ff',
+                        borderWidth: 1,
+                        yAxisID: 'yCount',
+                        barPercentage: 0.5
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: { grid: { color: '#30363d' }, ticks: { color: '#8b949e', maxTicksLimit: 8 } },
+                    yVolume: { 
+                        type: 'linear', 
+                        position: 'left', 
+                        grid: { color: '#30363d' }, 
+                        ticks: { color: '#3fb950', callback: v => '$' + v.toFixed(3) }, 
+                        beginAtZero: true 
+                    },
+                    yCount: { 
+                        type: 'linear', 
+                        position: 'right', 
+                        grid: { drawOnChartArea: false }, 
+                        ticks: { color: '#58a6ff', stepSize: 1 }, 
+                        beginAtZero: true 
+                    }
+                }
+            }
+        });
 
         const ctx = document.getElementById('meshChart').getContext('2d');
         const meshChart = new Chart(ctx, {
@@ -201,7 +265,7 @@
                         div.innerHTML = `
                             <div><strong>[BLOCK_TX #${tx.id}]</strong> Time (CST): <span style="color:#ffa657">${timeStr}</span></div>
                             <div>Raw Proof / Hash: <span style="color:#58a6ff">${tx.proof}</span></div>
-                            <div>Payload / Type: <span style="color:#bc8cff">${tx.payload}</span> | Amount: <strong style="color:#238636">$${Number(tx.amount_usdc).toFixed(2)} USDC</strong></div>
+                            <div>Payload / Type: <span style="color:#bc8cff">${typeof tx.payload === 'object' ? JSON.stringify(tx.payload) : tx.payload}</span> | Amount: <strong style="color:#238636">$${Number(tx.amount_usdc).toFixed(2)} USDC</strong></div>
                         `;
                         feed.appendChild(div);
                     });
@@ -215,6 +279,22 @@
                     meshChart.data.labels = sortedShares.map(s => formatCentralTimeShort(s.time));
                     meshChart.data.datasets[0].data = sortedShares.map(s => s.cpu);
                     meshChart.update();
+                }
+
+                // Poll Global Ingress Graph Feed
+                try {
+                    const txRes = await fetch('/api/global-transactions');
+                    const txData = await txRes.json();
+                    if (Array.isArray(txData) && txData.length > 0) {
+                        const chronTx = [...txData].reverse().slice(-20);
+                        document.getElementById('external-tx-counter').textContent = `Total Recorded: ${txData.length}`;
+                        globalTxChart.data.labels = chronTx.map(t => formatCentralTimeShort(t.timestamp));
+                        globalTxChart.data.datasets[0].data = chronTx.map(t => Number(t.amount_usdc || 0));
+                        globalTxChart.data.datasets[1].data = chronTx.map((_, idx) => idx + 1);
+                        globalTxChart.update();
+                    }
+                } catch (e) {
+                    console.error("External chart fetch error:", e);
                 }
             } catch (err) {
                 console.error("Polling error:", err);

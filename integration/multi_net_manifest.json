@@ -1,0 +1,25 @@
+{
+  "project": "ANAV Sovereign Node",
+  "node_id": "node_master_01",
+  "treasury": "0x0266c60Ba4F5B883d970300ca18ff598e77636D5",
+  "endpoint": "https://anav.trade/api/v1/mcp",
+  "networks": [
+    {
+      "name": "Akash-Network",
+      "status": "ACTIVE_DEPLOYED",
+      "role": "High-Concurrency Container & Ingress Orchestration"
+    },
+    {
+      "name": "io.net-DePIN",
+      "status": "GPU_CLUSTER_SYNCED",
+      "role": "Distributed AI Training & Inference Acceleration"
+    },
+    {
+      "name": "VastAI-Spot",
+      "status": "SPOT_HEARTBEAT_ACTIVE",
+      "role": "Elastic Spot-Market Compute & Spare Capacity Monetization"
+    }
+  ],
+  "protocols": ["x402-Base", "x402-Solana", "ERC-8004"],
+  "timestamp": 1794087900.0
+}

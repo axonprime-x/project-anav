@@ -1,4 +1,15 @@
 
+import json, os
+def get_base_rpc():
+    try:
+        if os.path.exists('config.json'):
+            with open('config.json', 'r') as cf:
+                return json.load(cf).get('base_rpc_url', 'https://base.gateway.tenderly.co')
+    except:
+        pass
+    return 'https://base.gateway.tenderly.co'
+BASE_RPC_URL = get_base_rpc()
+
 # --- PROJECT ANAV ASYNC QUEUE & DYNAMIC PEER SCORING ---
 import asyncio
 import time

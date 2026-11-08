@@ -1,3 +1,14 @@
+
+import json, os
+def get_base_rpc():
+    try:
+        if os.path.exists('config.json'):
+            with open('config.json', 'r') as cf:
+                return json.load(cf).get('base_rpc_url', 'https://base.gateway.tenderly.co')
+    except:
+        pass
+    return 'https://base.gateway.tenderly.co'
+BASE_RPC_URL = get_base_rpc()
 import os
 import sqlite3
 import json
@@ -7,7 +18,7 @@ DB_PATH = "data/anav_ledger.db"
 
 class OnChainSettler:
     def __init__(self, rpc_url=None):
-        self.rpc_url = rpc_url or os.getenv("WEB3_RPC_URL", "https://mainnet.base.org")
+        self.rpc_url = rpc_url or os.getenv("WEB3_RPC_URL", BASE_RPC_URL)
 
     def verify_x402_tx_onchain(self, tx_proof_hash):
         if tx_proof_hash.startswith("stress_tx_gen_") or tx_proof_hash.startswith("usdc_"):

@@ -1,0 +1,8 @@
+{
+  "node_id": "node_master_01",
+  "provider": "Farcaster / Base Agent Directories",
+  "hub_endpoint": "https://hub.farcaster.xyz:2281/v1/storage",
+  "agent_card": "https://anav.trade/.well-known/agent-card.json",
+  "status": "INITIALIZING_AGENT_REGISTRY_SYNC",
+  "timestamp": 1794145387.725685
+}

@@ -1,0 +1,7 @@
+{
+  "node_id": "node_master_01",
+  "provider": "io.net",
+  "aggregator_endpoint": "https://anav.trade/api/v1/mcp",
+  "status": "INITIALIZING_GPU_AGGREGATOR",
+  "timestamp": 1794145062.500422
+}

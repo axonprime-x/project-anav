@@ -1,0 +1,7 @@
+{
+  "node_id": "node_master_01",
+  "provider": "Vast.ai / Salad Cloud",
+  "spot_worker_endpoint": "https://anav.trade/api/v1/telemetry",
+  "status": "INITIALIZING_SPOT_WORKER",
+  "timestamp": 1794145289.2101676
+}

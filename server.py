@@ -1,70 +1,21 @@
 import os
-import sqlite3
+import sys
 import json
+import sqlite3
+import time
 from http.server import HTTPServer, BaseHTTPRequestHandler
-from urllib.parse import urlparse
 
 LED_DB = 'anav_ledger.db'
 
 class ANavHUDHandler(BaseHTTPRequestHandler):
-    def do_POST(self):
-        if self.path == "/api/v1/mcp":
-            content_length = int(self.headers.get("Content-Length", 0))
-            post_data = self.rfile.read(content_length)
-            payment_proof = self.headers.get("X-PAYMENT-PROOF", "none")
-            
-            self.send_response(200)
-            self.send_header("Content-Type", "application/json")
-            self.end_headers()
-            
-            response = {
-                "status": "SETTLED",
-                "proof_received": payment_proof,
-                "node": "node_master_01",
-                "message": "Ingress payload ingested and settled successfully."
-            }
-            self.wfile.write(json.dumps(response).encode("utf-8"))
-        else:
-            self.send_response(404)
-            self.end_headers()
+    def do_GET(self):
+        body = True
+        if self.command == 'HEAD':
+            body = False
 
-    def do_HEAD(self):
-        self.do_GET(body=False)
+        parsed_path = self.path.split('?')[0]
 
-    def do_GET(self, body=True):
-        parsed_path = urlparse(self.path)
-        path = parsed_path.path
-
-        if path == '/api/global-transactions':
-            import sqlite3, json
-            try:
-                conn = sqlite3.connect('anav_ledger.db')
-                cursor = conn.cursor()
-                cursor.execute('SELECT id, timestamp, proof, amount_usdc, payload FROM global_ingress_log ORDER BY id DESC LIMIT 50;')
-                rows = []
-                for r in cursor.fetchall():
-                    try:
-                        p = json.loads(r[4])
-                    except:
-                        p = {'raw': r[4]}
-                    rows.append({'id': r[0], 'timestamp': r[1], 'proof': r[2], 'amount_usdc': r[3], 'payload': p})
-                conn.close()
-                body_bytes = json.dumps(rows).encode('utf-8')
-                self.send_response(200)
-                self.send_header('Content-Type', 'application/json; charset=utf-8')
-                self.send_header('Access-Control-Allow-Origin', '*')
-                self.end_headers()
-                if body:
-                    self.wfile.write(body_bytes)
-                return
-            except Exception as e:
-                self.send_response(500)
-                self.end_headers()
-                if body:
-                    self.wfile.write(json.dumps({'error': str(e)}).encode('utf-8'))
-                return
-
-        if path == '/' or path == '/anav_dashboard.html':
+        if parsed_path == '/' or parsed_path == '/anav_dashboard.html':
             if os.path.exists('anav_dashboard.html'):
                 self.send_response(200)
                 self.send_header('Content-Type', 'text/html; charset=utf-8')
@@ -77,48 +28,67 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
                 self.end_headers()
                 if body:
                     self.wfile.write(b"Dashboard HTML not found.")
-        elif path == '/api/ledger':
+        elif parsed_path == '/api/ledger':
             self.send_response(200)
-            self.send_header('Content-Type', 'application/json')
+            self.send_header('Content-Type', 'application/json; charset=utf-8')
+            self.send_header('Access-Control-Allow-Origin', '*')
             self.end_headers()
-            
+
             if body:
                 try:
                     conn = sqlite3.connect(LED_DB)
                     conn.row_factory = sqlite3.Row
                     cursor = conn.cursor()
-                    
-                    try:
-                        cursor.execute("SELECT timestamp as time, cpu_spare as cpu, allocated_task FROM mesh_compute_shares ORDER BY id DESC LIMIT 50;")
-                        compute_shares = [dict(row) for row in cursor.fetchall()]
-                    except Exception:
-                        compute_shares = []
-                    
-                    try:
-                        cursor.execute("SELECT peer_node_id, trust_score, accrued_credits FROM global_trust_registry ORDER BY id DESC LIMIT 20;")
-                        trust_nodes = [dict(row) for row in cursor.fetchall()]
-                    except Exception:
-                        trust_nodes = []
-                    
-                    try:
-                        cursor.execute("SELECT * FROM global_ingress_log ORDER BY id DESC LIMIT 20;")
-                        transactions = [dict(row) for row in cursor.fetchall()]
-                    except Exception:
-                        transactions = []
 
+                    # Active nodes count dynamically queried from registered physical nodes
+                    active_nodes = 1
                     try:
-                        cursor.execute("SELECT COUNT(*) FROM mesh_nodes_catalog;")
-                        row = cursor.fetchone()
-                        active_nodes = len(cat_rows) + 1 if 'cat_rows' in locals() and cat_rows else 5
+                        cursor.execute("SELECT COUNT(DISTINCT node_id) FROM trust_registry;")
+                        row_nodes = cursor.fetchone()
+                        if row_nodes and row_nodes[0] is not None and row_nodes[0] > 0:
+                            active_nodes = row_nodes[0]
                     except Exception:
                         active_nodes = 1
 
+                    # Compute shares
+                    compute_shares = []
+                    try:
+                        cursor.execute("SELECT * FROM compute_shares ORDER BY id DESC LIMIT 20;")
+                        compute_shares = [dict(row) for row in cursor.fetchall()]
+                    except Exception:
+                        pass
+
+                    # Trust registry
+                    trust_nodes = []
+                    try:
+                        cursor.execute("SELECT * FROM trust_registry ORDER BY id DESC LIMIT 20;")
+                        trust_nodes = [dict(row) for row in cursor.fetchall()]
+                    except Exception:
+                        pass
+
+                    # Transactions / ingress log
+                    transactions = []
+                    try:
+                        cursor.execute("SELECT * FROM global_ingress_log ORDER BY id DESC LIMIT 50;")
+                        transactions = [dict(row) for row in cursor.fetchall()]
+                    except Exception:
+                        pass
+
+                    # Total Ingress USDC
+                    total_ingress_usdc = 0.0
                     try:
                         cursor.execute("SELECT SUM(amount_usdc) FROM global_ingress_log;")
                         row_sum = cursor.fetchone()
                         total_ingress_usdc = row_sum[0] if row_sum and row_sum[0] is not None else 0.0
                     except Exception:
                         total_ingress_usdc = 0.0
+
+                    # Node Endpoints
+                    try:
+                        cursor.execute("SELECT * FROM node_endpoints ORDER BY id DESC;")
+                        endpoints = [dict(row) for row in cursor.fetchall()]
+                    except Exception:
+                        endpoints = []
 
                     conn.close()
 
@@ -128,11 +98,12 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
                         "total_ingress_usdc": total_ingress_usdc,
                         "compute_shares": compute_shares,
                         "trust_registry": trust_nodes,
-                        "transactions": transactions
+                        "transactions": transactions,
+                        "node_endpoints": endpoints
                     }
                     self.wfile.write(json.dumps(payload).encode('utf-8'))
                 except Exception as e:
-                    err_payload = {"mesh_status": "ERROR", "error": str(e), "active_nodes": 1, "compute_shares": [], "transactions": []}
+                    err_payload = {"mesh_status": "ERROR", "error": str(e), "active_nodes": 1, "compute_shares": [], "transactions": [], "node_endpoints": []}
                     self.wfile.write(json.dumps(err_payload).encode('utf-8'))
         else:
             self.send_response(404)
@@ -140,30 +111,12 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
             if body:
                 self.wfile.write(b"Not Found")
 
-    def log_message(self, format, *args):
-        return
-
 def run_hud_server(port=8080):
     server_address = ('0.0.0.0', port)
+    HTTPServer.allow_reuse_address = True
     httpd = HTTPServer(server_address, ANavHUDHandler)
-    print(f"[ANAV HUD] Live Ledger HUD Server running on 0.0.0.0:{port}")
+    print(f'[HUD SERVER] Active and listening on port {port}...')
     httpd.serve_forever()
 
 if __name__ == '__main__':
     run_hud_server()
-
-@app.route('/api/global-transactions')
-def api_global_transactions():
-    import sqlite3, json
-    conn = sqlite3.connect('anav_ledger.db')
-    cursor = conn.cursor()
-    cursor.execute('SELECT id, timestamp, proof, amount_usdc, payload FROM global_ingress_log ORDER BY id DESC LIMIT 50;')
-    rows = []
-    for r in cursor.fetchall():
-        try:
-            p = json.loads(r[4])
-        except:
-            p = {'raw': r[4]}
-        rows.append({'id': r[0], 'timestamp': r[1], 'proof': r[2], 'amount_usdc': r[3], 'payload': p})
-    conn.close()
-    return json.dumps(rows)

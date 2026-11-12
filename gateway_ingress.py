@@ -53,7 +53,26 @@ async def root_index():
 
 @app.api_route("/api/v1/mcp", methods=["GET", "POST"])
 async def handle_mcp(request: Request):
+    client_ip = request.headers.get("CF-Connecting-IP") or \
+                request.headers.get("X-Forwarded-For") or \
+                (request.client.host if request.client else "127.0.0.1")
+    
     payment_proof = request.headers.get("X-PAYMENT-PROOF")
+    amount = 0.015 if payment_proof else 0.0
+    bridged_val = 1 if payment_proof else 0
+
+    try:
+        with sqlite3.connect(DB_PATH) as conn:
+            conn.execute(
+                """INSERT INTO global_ingress_log 
+                   (source_ip, endpoint, payment_proof, client_ip, amount_usdc, bridged) 
+                   VALUES (?, ?, ?, ?, ?, ?)""",
+                (client_ip, request.url.path, payment_proof or "NONE", client_ip, amount, bridged_val)
+            )
+            conn.commit()
+    except Exception as ex:
+        print(f"Ledger write error: {ex}")
+
     if not payment_proof:
         return JSONResponse(
             status_code=402,
@@ -63,4 +82,5 @@ async def handle_mcp(request: Request):
                 "treasury": "0x0266c60Ba4F5B883d970300ca18ff598e77636D5"
             }
         )
+
     return {"status": "VERIFIED", "settlement": "ACCEPTED", "proof": payment_proof}

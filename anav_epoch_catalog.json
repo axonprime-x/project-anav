@@ -1,0 +1,14 @@
+[
+    {
+        "timestamp": 1794628444.579552,
+        "date": "2026-11-13 21:54:04",
+        "generation": 1,
+        "metrics": {
+            "total_ingress_requests": 5248,
+            "verified_usdc_settlements": 380,
+            "active_strategy_matrix_count": 14,
+            "treasury_target": "0x0266c60Ba4F5B883d970300ca18ff598e77636D5"
+        },
+        "epoch_proof": "b01c78d66ddef2cdd0b07dc37088a3bdad50790bad14b526c3cff6cd4b37cffe"
+    }
+]

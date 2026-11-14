@@ -8,6 +8,11 @@ import subprocess
 PROJECT_DIR = "/home/anav/project-anav"
 os.chdir(PROJECT_DIR)
 
+# PRE-FLIGHT: Execute Self-Healing Network Watchdog
+print("[*] Phase 0: Executing Self-Healing Network Watchdog...")
+subprocess.run(["/home/anav/project-anav/anav_network_watchdog.sh"], check=False)
+
+
 print("==================================================")
 print("[*] ANAV Master Sovereign Node Initialization...")
 print("==================================================")

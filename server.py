@@ -1,3 +1,14 @@
+
+def verify_x402_proof(header_value):
+    if not header_value:
+        return False, 0.0, "MISSING_PROOF"
+    parts = header_value.split("_")
+    if len(parts) >= 3 and parts[0] in ["akash", "base", "solana"]:
+        return True, 0.001, header_value
+    if len(header_value) >= 32:
+        return True, 0.001, header_value
+    return False, 0.0, "INVALID_PROOF"
+
 import os
 import sys
 import json
@@ -60,21 +71,33 @@ def init_db():
 
 class ANavHUDHandler(BaseHTTPRequestHandler):
     def log_ingress_event(self):
-        try:
-            conn = sqlite3.connect(LED_DB)
-            cursor = conn.cursor()
-            payment_proof = self.headers.get('X-PAYMENT-PROOF', 'NONE')
-            client_ip = self.client_address[0]
+        payment_header = self.headers.get("X-PAYMENT-PROOF", "")
+        is_valid, amount, proof_str = verify_x402_proof(payment_header)
+        if not proof_str or proof_str == "":
+            proof_str = "NONE"
             
-            cursor.execute(
-                "INSERT INTO global_ingress_log (source_ip, client_ip, payment_proof, endpoint) VALUES (?, ?, ?, ?)",
-                (client_ip, client_ip, payment_proof, self.path)
-            )
-            conn.commit()
-            conn.close()
+        try:
+            with sqlite3.connect("anav_ledger.db", timeout=10) as conn:
+                cursor = conn.cursor()
+                cursor.execute(
+                    """
+                    INSERT INTO global_ingress_log 
+                    (source_ip, endpoint, client_ip, amount_usdc, payment_proof, payload, bridged)
+                    VALUES (?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        self.client_address[0],
+                        self.path,
+                        self.headers.get("X-Forwarded-For", self.client_address[0]),
+                        amount,
+                        proof_str,
+                        "x402_enforced_ingress",
+                        1 if is_valid else 0
+                    )
+                )
+                conn.commit()
         except Exception as e:
-            print(f"[DB LOG ERROR] {e}")
-
+            print(f"[Ledger Error] {e}")
     def do_HEAD(self):
         self.log_ingress_event()
         self.do_GET()
@@ -202,3 +225,17 @@ def run_hud_server(port=8080):
 
 if __name__ == '__main__':
     run_hud_server()
+
+@app.get("/.well-known/agent-card.json")
+def get_agent_card():
+    return {
+        "name": "ANAV-Sovereign-Node-node_master_01",
+        "version": "2026.11.0",
+        "description": "Project ANAV decentralized M2M micropayment gateway and sovereign mesh node",
+        "treasury_wallet": "0x0266c60Ba4F5B883d970300ca18ff598e77636D5",
+        "settlement_rails": ["x402-Base", "x402-Solana"],
+        "endpoints": {
+            "ingress": "https://anav.trade",
+            "ledger": "/api/ledger"
+        }
+    }

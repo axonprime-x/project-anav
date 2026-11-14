@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-set -e
 PROJECT_DIR="/home/anav/project-anav"
 cd "$PROJECT_DIR"
 
@@ -7,13 +6,13 @@ echo "=================================================="
 echo "[*] ANAV Master Sovereign Node Initialization..."
 echo "=================================================="
 
-echo "[*] Phase 1: Verifying Network Interface & MAC State..."
-if ip link show eth0 up >/dev/null 2>&1; then
-    echo "[+] Network interface operational."
-else
-    echo "[!] Warning: eth0 link down, attempting reset..."
-    ip link set eth0 up || true
+echo "[*] Phase 0: Executing Self-Healing Network Watchdog..."
+if [ -f "./anav_network_watchdog.sh" ]; then
+    ./anav_network_watchdog.sh
 fi
+
+echo "[*] Phase 1: Verifying Network Interface..."
+ip link show eth0 up >/dev/null 2>&1 || sudo ip link set eth0 up 2>/dev/null || true
 
 echo "[*] Phase 2: Verifying SQLite Ledger WAL Integrity..."
 python3 -c "
@@ -26,26 +25,15 @@ conn.close()
 print(f'[+] Ledger database verified: {mode}')
 "
 
-echo "[*] Phase 3: Purging stale bindings & launching Ingress Gateway..."
+echo "[*] Phase 3: Launching Ingress Gateway..."
 fuser -k 8080/tcp 2>/dev/null || true
 sleep 1
-
-# Launch FastAPI Ingress Gateway on port 8080 in background
-nohup python3 gateway_ingress.py > /home/anav/project-anav/anav_ingress.log 2>&1 &
+python3 gateway_ingress.py &
 GATEWAY_PID=$!
-sleep 2
 
-if ps -p $GATEWAY_PID > /dev/null; then
-    echo "[+] Ingress Gateway bound successfully to port 8080 (PID: $GATEWAY_PID)."
-else
-    echo "[!] Error: Ingress Gateway failed to start."
-    exit 1
-fi
-
-echo "[*] Phase 4: Initializing Mesh & Polymorphic Beacon Daemons..."
-# Start polymorphic beacon broadcaster directly in background with entropy padding
-nohup python3 daemons/daemon_beacon_broadcaster.py > /home/anav/project-anav/anav_beacon.log 2>&1 &
+echo "[*] Phase 4: Initializing Beacon Daemon..."
+python3 daemons/daemon_beacon_broadcaster.py &
 BEACON_PID=$!
-echo "[+] Polymorphic Beacon active (PID: $BEACON_PID)."
 
-echo "[+] ANAV Master Node initialization sequence complete."
+echo "[+] Initialization sequence complete. Holding main process..."
+wait $GATEWAY_PID $BEACON_PID

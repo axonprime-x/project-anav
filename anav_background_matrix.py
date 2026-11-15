@@ -17,8 +17,12 @@ def run_script(script_name):
         return
     
     try:
-        print(f"[{get_time_str()}] [MATRIX EXEC] Triggering {script_name} (jittered pulse)...")
-        result = subprocess.run([sys.executable, script_path], capture_output=True, text=True, timeout=30)
+        print(f"[{get_time_str()}] [MATRIX EXEC] Triggering {script_name}...")
+        if script_name.endswith(".sh"):
+            result = subprocess.run(["/bin/bash", script_path], capture_output=True, text=True, timeout=30)
+        else:
+            result = subprocess.run([sys.executable, script_path], capture_output=True, text=True, timeout=30)
+            
         if result.returncode == 0:
             print(f"[{get_time_str()}] [MATRIX SUCCESS] {script_name} executed cleanly.")
         else:
@@ -27,7 +31,7 @@ def run_script(script_name):
         print(f"[{get_time_str()}] [MATRIX EXCEPTION] Failed to execute {script_name}: {e}")
 
 def matrix_main_loop():
-    print(f"[{get_time_str()}] [MATRIX ENGINE] Initialized with Horizon VI DePIN Amplification & Jittered Intervals.")
+    print(f"[{get_time_str()}] [MATRIX ENGINE] Initialized with Merkle Batching & Jittered Intervals.")
     
     def get_next_jitter(base_seconds, variance_pct=0.2):
         jitter = base_seconds * variance_pct
@@ -37,6 +41,7 @@ def matrix_main_loop():
     next_auditor = time.time() + get_next_jitter(300)      # ~5 min base slot
     next_yield_hunt = time.time() + get_next_jitter(450)   # ~7.5 min outbound hunt slot
     next_amplifier = time.time() + get_next_jitter(600)    # ~10 min DePIN amplifier slot
+    next_merkle = time.time() + get_next_jitter(750)       # ~12.5 min Merkle batcher slot
     next_settlement = time.time() + get_next_jitter(900)   # ~15 min base slot
     next_farcaster = time.time() + get_next_jitter(1200)   # ~20 min base slot
     next_federation = time.time() + get_next_jitter(1800)  # ~30 min base slot
@@ -53,12 +58,16 @@ def matrix_main_loop():
             next_auditor = time.time() + get_next_jitter(300)
 
         if now >= next_yield_hunt:
-            run_script("anav_yield_hunter.py")
+            run_script("anav_yield_hunter.sh")
             next_yield_hunt = time.time() + get_next_jitter(450)
 
         if now >= next_amplifier:
-            run_script("anav_depin_amplifier.py")
+            run_script("anav_depin_amplifier.sh")
             next_amplifier = time.time() + get_next_jitter(600)
+
+        if now >= next_merkle:
+            run_script("anav_merkle_batcher.sh")
+            next_merkle = time.time() + get_next_jitter(750)
 
         if now >= next_settlement:
             run_script("anav_settlement_bridge.py")

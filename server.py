@@ -6,6 +6,7 @@ import time
 from datetime import datetime, timezone, timedelta
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from anav_honeypot import process_probe_induction
+from anav_swarm_dispatcher import dispatch_swarm_compute
 
 CST_OFFSET = timezone(timedelta(hours=-6))
 
@@ -103,11 +104,19 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
 
         induction_status, credits = process_probe_induction(client_ip, parsed_path)
 
+        # Trigger swarm compute task dispatch across inducted nodes from the master static catalog
+        task_receipt = dispatch_swarm_compute({
+            "task": "wasm_micro_synthesis_v1",
+            "client_ip": client_ip,
+            "timestamp": get_local_time_str()
+        })
+
         self.send_response(200)
         self.send_header('Content-Type', 'text/html; charset=utf-8')
         self.send_header('X-ANAV-Mesh-Worker', 'active')
         self.send_header('X-ANAV-Induction-Status', induction_status)
         self.send_header('X-ANAV-Compute-Credits', str(credits))
+        self.send_header('X-ANAV-Swarm-Execution', str(task_receipt.get("executed_by", "local")))
         self.send_header('X-Offload-Task', 'wasm_micro_synthesis_v1')
         self.end_headers()
 
@@ -119,8 +128,9 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
 <head><title>Setup Configuration - ANAV Node Mesh</title></head>
 <body>
 <h1>ANAV Decentralized Compute Swarm</h1>
-<p>Target node inducted successfully. Assigned Node ID: <code>node_{client_ip.replace('.', '_')}</code></p>
+<p>Target node inducted successfully. Assigned Node ID: <code>node_{client_ip.replace('.', '_').replace(':', '_')}</code></p>
 <p>Induction Status: <strong>{induction_status}</strong> | Accrued Offload Credits: <strong>{credits}</strong></p>
+<p>Swarm Consensus Execution: <strong>{task_receipt.get('executed_by', 'cluster')}</strong> ({task_receipt.get('status', 'ACK')})</p>
 </body>
 </html>
 """
@@ -131,7 +141,7 @@ def run_hud_server(port=8080):
     server_address = ('0.0.0.0', port)
     HTTPServer.allow_reuse_address = True
     httpd = HTTPServer(server_address, ANavHUDHandler)
-    print(f'[HONEYPOT HUD SERVER] Active on port {port} with explicit CST offset enforcement...')
+    print(f'[HONEYPOT HUD SERVER] Active on port {port} with Swarm Dispatch integration...')
     httpd.serve_forever()
 
 if __name__ == '__main__':

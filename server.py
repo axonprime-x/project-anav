@@ -41,15 +41,20 @@ def log_ingress(client_ip, path, payment_status, credits_allocated, revenue_usdc
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     timestamp TEXT,
                     client_ip TEXT,
-                    ingress_vector TEXT,
-                    payment_status TEXT,
-                    allocated_credit REAL,
-                    revenue_usdc REAL
+                    remote_ip TEXT,
+                    endpoint TEXT,
+                    status TEXT,
+                    payload TEXT,
+                    payment_proof TEXT,
+                    amount_usdc REAL,
+                    proof TEXT,
+                    bridged INTEGER,
+                    dest_port INTEGER
                 )
             ''')
             cursor.execute(
-                "INSERT INTO global_ingress_log (timestamp, client_ip, ingress_vector, payment_status, allocated_credit, revenue_usdc) VALUES (?, ?, ?, ?, ?, ?)",
-                (get_time_str(), client_ip, path, payment_status, credits_allocated, revenue_usdc)
+                "INSERT INTO global_ingress_log (timestamp, client_ip, endpoint, status, amount_usdc) VALUES (?, ?, ?, ?, ?)",
+                (get_time_str(), client_ip, path, payment_status, revenue_usdc)
             )
             conn.commit()
     except Exception as e:

@@ -34,11 +34,27 @@ def initialize_multi_twin_db():
         conn.commit()
 
 def run_multi_twin_committee():
-    """Runs specialized adversarial, yield, and stealth twin personas to compound intelligence."""
+    """Runs specialized adversarial, yield, and stealth twin personas driven by real ledger revenue."""
     initialize_multi_twin_db()
     timestamp = time.time()
     
-    # Specialized twin personas generating parallel hypotheses
+    # Calculate real ledger revenue if table exists
+    total_revenue = 0.0
+    try:
+        with sqlite3.connect(LEDGER_DB) as conn:
+            cursor = conn.cursor()
+            cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='global_ingress_log';")
+            if cursor.fetchone():
+                cursor.execute("SELECT SUM(revenue_usdc) FROM global_ingress_log;")
+                row = cursor.fetchone()
+                if row and row[0]:
+                    total_revenue = row[0]
+    except Exception:
+        pass
+
+    # Dynamic multiplier based on earned revenue velocity
+    yield_multiplier = 1.0 + (total_revenue * 0.1)
+
     committee_proposals = [
         {
             "persona": "RED_TEAM_ADVERSARIAL",
@@ -51,8 +67,8 @@ def run_multi_twin_committee():
             "persona": "YIELD_OPTIMIZER",
             "id": "twin_yield_x402_v2",
             "domain": "settlement",
-            "hypothesis": "Pre-compute Base mainnet micropayment challenge headers to shave 14ms off settlement latency.",
-            "score": random.uniform(0.95, 1.25)
+            "hypothesis": f"Optimizing tiered x402 pricing multipliers based on accumulated ledger revenue (${total_revenue:.3f} USDC).",
+            "score": random.uniform(1.05, 1.35) * yield_multiplier
         },
         {
             "persona": "STEALTH_EVASION",
@@ -69,7 +85,6 @@ def run_multi_twin_committee():
         
         for proposal in committee_proposals:
             status = "REJECTED_SUB_PAR"
-            # Filter threshold for tensor weight injection
             if proposal["score"] >= 0.95:
                 status = "ADOPTED_AND_INJECTED"
                 cursor.execute('''
@@ -90,10 +105,10 @@ def run_multi_twin_committee():
             ''', (proposal["persona"], proposal["hypothesis"], proposal["score"], status, timestamp))
             
         conn.commit()
-    return injected_count
+    return injected_count, total_revenue
 
 def run_anavai_cycle():
-    injected = run_multi_twin_committee()
+    injected, revenue = run_multi_twin_committee()
     timestamp = time.time()
     
     with sqlite3.connect(LEDGER_DB) as conn:
@@ -101,29 +116,40 @@ def run_anavai_cycle():
         cursor.execute("SELECT COUNT(*) FROM anavai_strategy_matrix;")
         total_strategies = cursor.fetchone()[0]
         
-    state = "MULTI_TWIN_COMMITTEE_SYNTHESIS"
+    state = "YIELD_DRIVEN_MULTI_TWIN_SYNTHESIS"
     payload = json.dumps({
         "node": NODE_ID,
-        "engine": "ANAVAI-Multi-Twin-Matrix",
+        "engine": "ANAVAI-Yield-Multi-Twin-Matrix",
+        "accumulated_revenue_usdc": revenue,
         "committee_injected_weights": injected,
         "total_matrix_size": total_strategies,
         "treasury": "0x0266c60Ba4F5B883d970300ca18ff598e77636D5"
     })
     
-    proof = hashlib.sha256(f"anavai-multi-twin-{timestamp}-{payload}".encode()).hexdigest()
+    proof = hashlib.sha256(f"anavai-yield-{timestamp}-{payload}".encode()).hexdigest()
     
     with sqlite3.connect(LEDGER_DB) as conn:
         cursor = conn.cursor()
+        cursor.execute('''
+            CREATE TABLE IF NOT EXISTS anavai_autonomous_log (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                timestamp REAL,
+                generation INTEGER,
+                agent_state TEXT,
+                decision_payload TEXT,
+                hash_proof TEXT
+            )
+        ''')
         cursor.execute(
             'INSERT INTO anavai_autonomous_log (timestamp, generation, agent_state, decision_payload, hash_proof) VALUES (?, ?, ?, ?, ?)',
             (timestamp, int(timestamp % 10000), state, payload, proof)
         )
         conn.commit()
 
-    print(f"[ANAVAI COMMITTEE] Synthesis complete. Injected Weights: {injected} | Matrix Size: {total_strategies} | Proof: {proof[:16]}")
+    print(f"[ANAVAI YIELD COMMITTEE] Synthesis complete. Revenue: ${revenue:.3f} | Injected: {injected} | Matrix Size: {total_strategies} | Proof: {proof[:16]}")
 
 if __name__ == '__main__':
-    print("[ANAVAI] Initializing Multi-Twin Adversarial Committee Engine...")
+    print("[ANAVAI] Initializing Yield-Driven Multi-Twin Committee Engine...")
     initialize_multi_twin_db()
     while True:
         try:

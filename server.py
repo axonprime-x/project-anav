@@ -32,7 +32,7 @@ def verify_onchain_payment_proof(proof_string):
         return True
     return False
 
-def log_ingress(client_ip, path, payment_status, credits_allocated, revenue_usdc):
+def log_ingress(client_ip, path, payment_status, credits_allocated, revenue_usdc, is_simulation=1):
     try:
         with sqlite3.connect(LEDGER_DB) as conn:
             cursor = conn.cursor()
@@ -49,12 +49,13 @@ def log_ingress(client_ip, path, payment_status, credits_allocated, revenue_usdc
                     amount_usdc REAL,
                     proof TEXT,
                     bridged INTEGER,
-                    dest_port INTEGER
+                    dest_port INTEGER,
+                    is_simulation INTEGER DEFAULT 1
                 )
             ''')
             cursor.execute(
-                "INSERT INTO global_ingress_log (timestamp, client_ip, endpoint, status, amount_usdc) VALUES (?, ?, ?, ?, ?)",
-                (get_time_str(), client_ip, path, payment_status, revenue_usdc)
+                "INSERT INTO global_ingress_log (timestamp, client_ip, endpoint, status, amount_usdc, is_simulation) VALUES (?, ?, ?, ?, ?, ?)",
+                (get_time_str(), client_ip, path, payment_status, revenue_usdc, is_simulation)
             )
             conn.commit()
     except Exception as e:
@@ -82,6 +83,10 @@ class ANAVX402Handler(http.server.BaseHTTPRequestHandler):
         is_loopback = client_ip in ["127.0.0.1", "::1"]
         payment_valid = verify_onchain_payment_proof(payment_proof)
 
+        # Determine if this is live production vs local simulation
+        # If payment is cryptographically verified from an external IP, it's production (is_simulation = 0)
+        is_sim_flag = 1 if is_loopback else (0 if payment_valid else 1)
+
         if not payment_valid and not is_loopback:
             self.send_response(402)
             self.send_header("Content-Type", "application/json")
@@ -101,7 +106,7 @@ class ANAVX402Handler(http.server.BaseHTTPRequestHandler):
                 "supported_rails": ["Base-Mainnet", "Solana-DePIN"]
             }
             self.wfile.write(json.dumps(error_payload, indent=2).encode('utf-8'))
-            log_ingress(client_ip, path, "402_PAYMENT_REQUIRED", 0.0, 0.0)
+            log_ingress(client_ip, path, "402_PAYMENT_REQUIRED", 0.0, 0.0, is_simulation=1)
             return
 
         # 3. Trigger Real Sandbox WASM Workload Fulfillment
@@ -148,8 +153,8 @@ class ANAVX402Handler(http.server.BaseHTTPRequestHandler):
 """
         self.wfile.write(response_html.encode('utf-8'))
         status_label = "VERIFIED_PAID_AND_FULFILLED" if payment_valid else "LOCAL_LOOPBACK_FULFILLED"
-        log_ingress(client_ip, path, status_label, effective_credits, effective_revenue)
-        print(f"[{get_time_str()}] [INGRESS FULFILLED] Served {path} to {client_ip} | Proof: {execution_proof[:12] if execution_proof else 'N/A'}")
+        log_ingress(client_ip, path, status_label, effective_credits, effective_revenue, is_simulation=is_sim_flag)
+        print(f"[{get_time_str()}] [INGRESS FULFILLED] Served {path} to {client_ip} | Sim: {is_sim_flag} | Proof: {execution_proof[:12] if execution_proof else 'N/A'}")
 
     def serve_public_asset(self, path):
         self.send_response(200)

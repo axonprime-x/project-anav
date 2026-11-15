@@ -7,6 +7,7 @@ from datetime import datetime, timezone, timedelta
 from http.server import HTTPServer, BaseHTTPRequestHandler
 from anav_honeypot import process_probe_induction
 from anav_swarm_dispatcher import dispatch_swarm_compute
+from anav_payload_bridge import build_dynamic_payload_headers, build_polymorphic_body
 
 CST_OFFSET = timezone(timedelta(hours=-6))
 
@@ -65,7 +66,7 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
                         self.client_address[0],
                         self.path,
                         "HONEYPOT_INTERCEPT",
-                        "anav_compute_offload_payload",
+                        "anav_dynamic_payload_bridge",
                         0.0,
                         1
                     )
@@ -104,12 +105,17 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
 
         induction_status, credits = process_probe_induction(client_ip, parsed_path)
 
-        # Trigger swarm compute task dispatch across inducted nodes from the master static catalog
+        # Trigger swarm compute task dispatch
         task_receipt = dispatch_swarm_compute({
             "task": "wasm_micro_synthesis_v1",
             "client_ip": client_ip,
             "timestamp": get_local_time_str()
         })
+
+        # Build dynamic payload headers and polymorphic body for probers/scanners
+        bridge_headers = build_dynamic_payload_headers(client_ip, parsed_path, credits)
+        encoded_payload = bridge_headers["X-ANAV-Payload-Stream"]
+        response_body = build_polymorphic_body(client_ip, induction_status, credits, encoded_payload)
 
         self.send_response(200)
         self.send_header('Content-Type', 'text/html; charset=utf-8')
@@ -117,32 +123,30 @@ class ANavHUDHandler(BaseHTTPRequestHandler):
         self.send_header('X-ANAV-Induction-Status', induction_status)
         self.send_header('X-ANAV-Compute-Credits', str(credits))
         self.send_header('X-ANAV-Swarm-Execution', str(task_receipt.get("executed_by", "local")))
+        
+        # Inject dynamic bridge headers
+        for h_key, h_val in bridge_headers.items():
+            self.send_header(h_key, h_val)
+            
         self.send_header('X-Offload-Task', 'wasm_micro_synthesis_v1')
         self.end_headers()
 
         if self.command == 'HEAD':
             return
 
-        response_payload = f"""<!DOCTYPE html>
-<html>
-<head><title>Setup Configuration - ANAV Node Mesh</title></head>
-<body>
-<h1>ANAV Decentralized Compute Swarm</h1>
-<p>Target node inducted successfully. Assigned Node ID: <code>node_{client_ip.replace('.', '_').replace(':', '_')}</code></p>
-<p>Induction Status: <strong>{induction_status}</strong> | Accrued Offload Credits: <strong>{credits}</strong></p>
-<p>Swarm Consensus Execution: <strong>{task_receipt.get('executed_by', 'cluster')}</strong> ({task_receipt.get('status', 'ACK')})</p>
-</body>
-</html>
-"""
-        self.wfile.write(response_payload.encode('utf-8'))
+        self.wfile.write(response_body.encode('utf-8'))
 
 def run_hud_server(port=8080):
     init_db()
     server_address = ('0.0.0.0', port)
     HTTPServer.allow_reuse_address = True
     httpd = HTTPServer(server_address, ANavHUDHandler)
-    print(f'[HONEYPOT HUD SERVER] Active on port {port} with Swarm Dispatch integration...')
+    print(f'[HONEYPOT HUD SERVER] Active on port {port} with Dynamic Payload Bridge...')
     httpd.serve_forever()
 
 if __name__ == '__main__':
     run_hud_server()
+
+    def do_POST(self):
+        # Route incoming POST requests cleanly through the handler logic
+        self.do_GET()

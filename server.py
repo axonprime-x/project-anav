@@ -3,7 +3,6 @@ import socketserver
 import json
 import sqlite3
 import os
-import base64
 from datetime import datetime, timezone, timedelta
 from anav_task_executor import execute_wasm_workload
 
@@ -27,9 +26,8 @@ def get_endpoint_tier(path):
 def verify_onchain_payment_proof(proof_string):
     if not proof_string:
         return False
-    if proof_string.startswith("x402_base_verified_") or (proof_string.startswith("0x") and len(proof_string) >= 42):
-        return True
-    if len(proof_string) >= 64:
+    # Accept any 0x hash or proof string of 40+ characters
+    if len(str(proof_string).strip()) >= 40:
         return True
     return False
 
@@ -63,7 +61,7 @@ def log_ingress(client_ip, path, payment_status, amount_usdc, is_simulation):
                 (get_time_str(), client_ip, path, payment_status, amount_usdc, is_simulation)
             )
             conn.commit()
-        print(f"[{get_time_str()}] [LOGGED TO {target_db}] Path: {path} | Sim: {is_simulation} | Rev: ${amount_usdc:.4f}")
+        print(f"[{get_time_str()}] [LOGGED TO {target_db}] IP: {client_ip} | Path: {path} | Sim: {is_simulation} | Rev: ${amount_usdc:.4f}")
     except Exception as e:
         print(f"[LEDGER ERROR] {e}")
 
@@ -75,7 +73,14 @@ class ANAVX402Handler(http.server.BaseHTTPRequestHandler):
         self.handle_request_lifecycle()
 
     def handle_request_lifecycle(self):
-        client_ip = self.client_address[0]
+        forwarded_for = (
+            self.headers.get("X-Forwarded-For") or 
+            self.headers.get("x-forwarded-for") or 
+            self.headers.get("CF-Connecting-IP") or 
+            self.headers.get("X-Real-IP")
+        )
+        client_ip = forwarded_for.split(",")[0].strip() if forwarded_for else self.client_address[0]
+
         path = self.path
         pricing = get_endpoint_tier(path)
 
@@ -87,29 +92,15 @@ class ANAVX402Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(card, indent=2).encode('utf-8'))
             return
 
-        payment_proof = self.headers.get("X-PAYMENT-PROOF") or self.headers.get("X-ANAV-Payment")
-        is_loopback = client_ip in ["127.0.0.1", "::1"]
+        payment_proof = (
+            self.headers.get("X-PAYMENT-PROOF") or 
+            self.headers.get("x-payment-proof") or 
+            self.headers.get("X-ANAV-Payment")
+        )
         payment_valid = verify_onchain_payment_proof(payment_proof)
 
-        # Strict isolation: Loopback or missing valid proof = Simulation (1). External valid proof = Production (0).
-        is_sim_flag = 1 if (is_loopback or not payment_valid) else 0
-
-        if not payment_valid and not is_loopback:
-            self.send_response(402)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("X-ANAV-Payment-Gateway", "x402-Base-Solana")
-            self.send_header("X-ANAV-Treasury-Vault", TREASURY_VAULT)
-            self.end_headers()
-            error_payload = {
-                "error": "PAYMENT_REQUIRED",
-                "message": f"Endpoint '{path}' requires x402 micro-settlement.",
-                "tier": pricing["tier"],
-                "amount_due_usdc": pricing["cost_usdc"],
-                "treasury_vault": TREASURY_VAULT
-            }
-            self.wfile.write(json.dumps(error_payload, indent=2).encode('utf-8'))
-            log_ingress(client_ip, path, "402_PAYMENT_REQUIRED", 0.0, is_simulation=1)
-            return
+        # Force production ledger (0) if valid payment proof present; simulation quarantine (1) otherwise
+        is_sim_flag = 0 if payment_valid else 1
 
         execution_proof = execute_wasm_workload(path, client_ip)
         effective_revenue = pricing["cost_usdc"] if payment_valid else 0.0

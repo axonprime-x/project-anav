@@ -34,29 +34,23 @@ SQL
 
 echo "[$(get_time_str)] Native Bash Ingress Daemon active on port $PORT..."
 
-# High-performance netcat loop serving HTTP requests
 while true; do
-    # Using nc (netcat) to listen and parse request
-    # Expects netcat-openbsd or traditional supporting -l
     response=$(nc -l -p "$PORT" -q 1 2>/dev/null)
     
     if [ -z "$response" ]; then
         continue
-    }
+    fi
 
-    # Parse HTTP Method and Path
     request_line=$(echo "$response" | head -n 1)
     method=$(echo "$request_line" | awk '{print $1}')
     path=$(echo "$request_line" | awk '{print $2}')
     
     if [ -z "$path" ]; then
         continue
-    }
+    fi
 
-    # Extract Payment Proof header if present
     payment_proof=$(echo "$response" | grep -i "X-PAYMENT-PROOF" | awk -F': ' '{print $2}' | tr -d '\r')
     
-    # Determine pricing tier & cost
     cost=0.0
     tier="LIGHT_QUERY"
     if [[ "$path" == *"/api/synth"* ]] || [[ "$path" == *"/api/proxy"* ]]; then
@@ -67,25 +61,20 @@ while true; do
         tier="STANDARD_COMPUTE"
     fi
 
-    # Validate payment proof format (0x... or x402_...)
     is_valid_proof=0
     if [[ "$payment_proof" =~ ^0x[a-fA-F0-9]{40,}$ ]] || [[ "$payment_proof" == x402_base_verified_* ]]; then
         is_valid_proof=1
     fi
 
-    # Hard isolation rule: Local loopback or missing proof = Simulation (is_simulation = 1)
-    # Verified external proofs = Production (is_simulation = 0)
     is_sim_flag=1
     if [ "$is_valid_proof" -eq 1 ]; then
         is_sim_flag=0
     fi
 
-    # Generate execution hash via openssl
-    raw_payload="$path-$CST_TIME-bash-wasm"
+    raw_payload="$path-bash-wasm"
     exec_hash=$(echo -n "$raw_payload" | openssl dgst -sha256 | awk '{print $2}')
 
-    if [ "$cost" -gt 0 ] && [ "$is_valid_proof" -eq 0 ]; then
-        # Send 402 Payment Required
+    if (( $(echo "$cost > 0" | bc -l) )) && [ "$is_valid_proof" -eq 0 ]; then
         status_code="402_PAYMENT_REQUIRED"
         log_ingress "127.0.0.1" "$path" "$status_code" 0.0 1
         
@@ -98,14 +87,13 @@ while true; do
             echo "{\"error\": \"PAYMENT_REQUIRED\", \"tier\": \"$tier\", \"amount_due_usdc\": $cost, \"treasury_vault\": \"$TREASURY_VAULT\"}"
         } | nc -w 1 127.0.0.1 $PORT 2>/dev/null &
     else
-        # Send 200 OK Fulfilled Gateway Response
         status_code="VERIFIED_FULFILLED"
         if [ "$is_sim_flag" -eq 1 ]; then
             status_code="LOCAL_LOOPBACK_FULFILLED"
         fi
         
         log_ingress "127.0.0.1" "$path" "$status_code" "$cost" "$is_sim_flag"
-        echo "[$(get_time_str)] [INGRESS BASH] Path: $path | Sim Flag: $is_sim_flag | Status: $status_code"
+        echo "[$(get_time_str)] [INGRESS BASH] Path: $path | Sim: $is_sim_flag | Status: $status_code"
 
         {
             echo -e "HTTP/1.1 200 OK"

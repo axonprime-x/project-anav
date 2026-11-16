@@ -193,6 +193,8 @@ if __name__ == '__main__':
     while True:
         try:
             execute_telemetry_poll()
+            # Autonomic self-healing evaluation pass
+            evaluate_and_heal()
         except Exception as e:
             print(f"[ANAV-AI Engine Error] {e}")
         

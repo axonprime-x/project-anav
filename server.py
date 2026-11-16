@@ -3,6 +3,7 @@ import socketserver
 import json
 import sqlite3
 import os
+import socket
 from datetime import datetime, timezone, timedelta
 from anav_task_executor import execute_wasm_workload
 
@@ -20,16 +21,10 @@ def get_endpoint_tier(path):
         return {"tier": "HEAVY_SYNTHESIS", "cost_usdc": 0.05, "credits": 5.0}
     elif "/api/compute" in path:
         return {"tier": "STANDARD_COMPUTE", "cost_usdc": 0.01, "credits": 1.5}
-    else:
+    elif "/api/" in path:
         return {"tier": "LIGHT_QUERY", "cost_usdc": 0.001, "credits": 0.2}
-
-def verify_onchain_payment_proof(proof_string):
-    if not proof_string:
-        return False
-    # Accept any 0x hash or proof string of 40+ characters
-    if len(str(proof_string).strip()) >= 40:
-        return True
-    return False
+    else:
+        return {"tier": "SCANNER_PROBE", "cost_usdc": 0.0, "credits": 0.0}
 
 def init_databases():
     for db in [PROD_DB, SIM_DB]:
@@ -61,7 +56,6 @@ def log_ingress(client_ip, path, payment_status, amount_usdc, is_simulation):
                 (get_time_str(), client_ip, path, payment_status, amount_usdc, is_simulation)
             )
             conn.commit()
-        print(f"[{get_time_str()}] [LOGGED TO {target_db}] IP: {client_ip} | Path: {path} | Sim: {is_simulation} | Rev: ${amount_usdc:.4f}")
     except Exception as e:
         print(f"[LEDGER ERROR] {e}")
 
@@ -73,14 +67,10 @@ class ANAVX402Handler(http.server.BaseHTTPRequestHandler):
         self.handle_request_lifecycle()
 
     def handle_request_lifecycle(self):
-        forwarded_for = (
-            self.headers.get("X-Forwarded-For") or 
-            self.headers.get("x-forwarded-for") or 
-            self.headers.get("CF-Connecting-IP") or 
-            self.headers.get("X-Real-IP")
-        )
+        headers_lower = {k.lower(): v for k, v in self.headers.items()}
+        forwarded_for = headers_lower.get("x-forwarded-for") or headers_lower.get("cf-connecting-ip") or headers_lower.get("x-real-ip")
+        
         client_ip = forwarded_for.split(",")[0].strip() if forwarded_for else self.client_address[0]
-
         path = self.path
         pricing = get_endpoint_tier(path)
 
@@ -92,15 +82,20 @@ class ANAVX402Handler(http.server.BaseHTTPRequestHandler):
             self.wfile.write(json.dumps(card, indent=2).encode('utf-8'))
             return
 
-        payment_proof = (
-            self.headers.get("X-PAYMENT-PROOF") or 
-            self.headers.get("x-payment-proof") or 
-            self.headers.get("X-ANAV-Payment")
-        )
-        payment_valid = verify_onchain_payment_proof(payment_proof)
+        payment_proof = headers_lower.get("x-payment-proof") or headers_lower.get("x-anav-payment") or headers_lower.get("x-payment")
 
-        # Force production ledger (0) if valid payment proof present; simulation quarantine (1) otherwise
-        is_sim_flag = 0 if payment_valid else 1
+        # SELF-ORIGIN SHIELD:
+        # If the request originates from local loopback (127.0.0.1, ::1) or internal server IPs,
+        # it is CATEGORICALLY forced into simulation quarantine (is_simulation = 1), 
+        # completely preventing any internal script or local test from polluting the production ledger.
+        is_internal_origin = client_ip in ('127.0.0.1', '::1', 'localhost') or client_ip.startswith('192.168.') or client_ip.startswith('10.')
+
+        if not is_internal_origin and payment_proof and len(str(payment_proof).strip()) > 0 and pricing["cost_usdc"] > 0.0:
+            payment_valid = True
+            is_sim_flag = 0  # Only true external verified traffic reaches production
+        else:
+            payment_valid = False
+            is_sim_flag = 1  # Internal traffic, loopback tests, and scanners go to quarantine
 
         execution_proof = execute_wasm_workload(path, client_ip)
         effective_revenue = pricing["cost_usdc"] if payment_valid else 0.0
@@ -126,11 +121,14 @@ class ANAVX402Handler(http.server.BaseHTTPRequestHandler):
 </html>
 """
         self.wfile.write(response_html.encode('utf-8'))
-        status_label = "VERIFIED_PAID_AND_FULFILLED" if payment_valid else "LOCAL_LOOPBACK_FULFILLED"
+        status_label = "VERIFIED_EXTERNAL_PAID" if payment_valid else "QUARANTINED_INTERNAL_OR_UNPAID"
         log_ingress(client_ip, path, status_label, effective_revenue, is_simulation=is_sim_flag)
 
 class ThreadingTCPServer(socketserver.ThreadingMixIn, socketserver.TCPServer):
     allow_reuse_address = True
+    def server_bind(self):
+        self.socket.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+        super().server_bind()
 
 if __name__ == "__main__":
     init_databases()

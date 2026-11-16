@@ -3,157 +3,158 @@ import time
 import sqlite3
 import json
 import hashlib
-import random
-import base64
+import subprocess
+import requests
 
 LEDGER_DB = 'anav_ledger.db'
 NODE_ID = "node_master_01"
+TREASURY_VAULT = "0x0266c60Ba4F5B883d970300ca18ff598e77636D5"
+BASE_RPC_URL = "https://mainnet.base.org"
+AKASH_RPC_URL = "https://rpc.akashnet.net:443"
 
-def initialize_multi_twin_db():
+def initialize_telemetry_db():
     with sqlite3.connect(LEDGER_DB) as conn:
         cursor = conn.cursor()
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS anavai_strategy_matrix (
-                strategy_id TEXT PRIMARY KEY,
-                domain TEXT,
-                distilled_logic TEXT,
-                success_weight REAL,
-                last_mutation_timestamp REAL
+            CREATE TABLE IF NOT EXISTS anavai_telemetry_matrix (
+                metric_key TEXT PRIMARY KEY,
+                source_endpoint TEXT,
+                real_value TEXT,
+                status TEXT,
+                last_updated REAL
             )
         ''')
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS anavai_twin_committee_log (
+            CREATE TABLE IF NOT EXISTS anavai_telemetry_audit_log (
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
-                twin_persona TEXT,
-                hypothesis TEXT,
-                simulated_score REAL,
-                status TEXT,
-                timestamp REAL
+                timestamp REAL,
+                total_revenue_usdc REAL,
+                base_gas_gwei REAL,
+                base_block_height INTEGER,
+                akash_status TEXT,
+                hash_proof TEXT
             )
         ''')
         conn.commit()
 
-def run_multi_twin_committee():
-    """Runs specialized adversarial, yield, and stealth twin personas driven by real ledger revenue."""
-    initialize_multi_twin_db()
+def fetch_base_l2_telemetry():
+    """Queries live Base L2 mainnet RPC for actual block height, gas price, and vault balance."""
+    try:
+        session = requests.Session()
+        
+        # 1. Fetch Gas Price
+        res_gas = session.post(BASE_RPC_URL, json={"jsonrpc":"2.0","method":"eth_gasPrice","params":[],"id":1}, timeout=3)
+        gas_wei = int(res_gas.json().get("result", "0x0"), 16) if res_gas.status_code == 200 else 0
+        gas_gwei = gas_wei / 10**9
+
+        # 2. Fetch Latest Block Number
+        res_block = session.post(BASE_RPC_URL, json={"jsonrpc":"2.0","method":"eth_blockNumber","params":[],"id":2}, timeout=3)
+        block_height = int(res_block.json().get("result", "0x0"), 16) if res_block.status_code == 200 else 0
+
+        # 3. Fetch Treasury Vault Balance
+        res_bal = session.post(BASE_RPC_URL, json={"jsonrpc":"2.0","method":"eth_getBalance","params":[TREASURY_VAULT, "latest"],"id":3}, timeout=3)
+        vault_wei = int(res_bal.json().get("result", "0x0"), 16) if res_bal.status_code == 200 else 0
+        vault_eth = vault_wei / 10**18
+
+        return {
+            "status": "ONLINE_CONNECTED",
+            "gas_gwei": gas_gwei,
+            "block_height": block_height,
+            "vault_eth": vault_eth
+        }
+    except Exception as e:
+        return {"status": "RPC_ERROR", "error": str(e), "gas_gwei": 0.0, "block_height": 0, "vault_eth": 0.0}
+
+def fetch_akash_telemetry():
+    """Queries live Akash network RPC status."""
+    try:
+        res = requests.get(f"{AKASH_RPC_URL}/status", timeout=3)
+        if res.status_code == 200:
+            data = res.json().get("result", {})
+            sync_info = data.get("sync_info", {})
+            return {
+                "status": "AKASH_CONNECTED",
+                "latest_block": sync_info.get("latest_block_height", "unknown"),
+                "catching_up": sync_info.get("catching_up", False)
+            }
+    except Exception as e:
+        return {"status": "AKASH_DEGRADED", "error": str(e)}
+    return {"status": "AKASH_OFFLINE"}
+
+def execute_telemetry_poll():
+    initialize_telemetry_db()
     timestamp = time.time()
     
-    # Calculate real ledger revenue if table exists
+    # 1. Gather Real Ledger State
     total_revenue = 0.0
+    verified_reqs = 0
     try:
         with sqlite3.connect(LEDGER_DB) as conn:
             cursor = conn.cursor()
             cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='global_ingress_log';")
             if cursor.fetchone():
-                cursor.execute("SELECT SUM(revenue_usdc) FROM global_ingress_log;")
+                cursor.execute("SELECT COUNT(*), COALESCE(SUM(amount_usdc), 0.0) FROM global_ingress_log WHERE is_simulation = 0;")
                 row = cursor.fetchone()
-                if row and row[0]:
-                    total_revenue = row[0]
+                if row:
+                    verified_reqs = row[0]
+                    total_revenue = row[1]
     except Exception:
         pass
 
-    # Dynamic multiplier based on earned revenue velocity
-    yield_multiplier = 1.0 + (total_revenue * 0.1)
+    # 2. Gather External Internet Telemetry (RPC & Akash)
+    base_data = fetch_base_l2_telemetry()
+    akash_data = fetch_akash_telemetry()
 
-    committee_proposals = [
-        {
-            "persona": "RED_TEAM_ADVERSARIAL",
-            "id": "twin_red_probe_v1",
-            "domain": "defense",
-            "hypothesis": "Simulate deep packet inspection injection to test polymorphic signature resilience.",
-            "score": random.uniform(0.91, 1.12)
-        },
-        {
-            "persona": "YIELD_OPTIMIZER",
-            "id": "twin_yield_x402_v2",
-            "domain": "settlement",
-            "hypothesis": f"Optimizing tiered x402 pricing multipliers based on accumulated ledger revenue (${total_revenue:.3f} USDC).",
-            "score": random.uniform(1.05, 1.35) * yield_multiplier
-        },
-        {
-            "persona": "STEALTH_EVASION",
-            "id": "twin_stealth_mesh_v3",
-            "domain": "networking",
-            "hypothesis": "Rotate polymorphic User-Agent entropy pools using Poisson-distributed timing jitter.",
-            "score": random.uniform(0.93, 1.18)
-        }
-    ]
-    
-    injected_count = 0
+    # 3. Compute Deterministic Health & Yield Multiplier
+    network_efficiency = 1.0
+    if base_data["status"] == "ONLINE_CONNECTED":
+        # Adjust efficiency based on real gas congestion
+        network_efficiency = max(0.8, 1.2 - (base_data["gas_gwei"] / 100.0))
+
+    # 4. Commit Real Data to SQLite
     with sqlite3.connect(LEDGER_DB) as conn:
         cursor = conn.cursor()
         
-        for proposal in committee_proposals:
-            status = "REJECTED_SUB_PAR"
-            if proposal["score"] >= 0.95:
-                status = "ADOPTED_AND_INJECTED"
-                cursor.execute('''
-                    INSERT OR REPLACE INTO anavai_strategy_matrix (strategy_id, domain, distilled_logic, success_weight, last_mutation_timestamp)
-                    VALUES (?, ?, ?, ?, ?)
-                ''', (
-                    proposal["id"], 
-                    proposal["domain"], 
-                    f"[{proposal['persona']}] {proposal['hypothesis']}", 
-                    proposal["score"], 
-                    timestamp
-                ))
-                injected_count += 1
-                
+        metrics = [
+            ("base_l2_gas_gwei", BASE_RPC_URL, str(base_data.get("gas_gwei", 0)), base_data["status"], timestamp),
+            ("base_l2_block_height", BASE_RPC_URL, str(base_data.get("block_height", 0)), base_data["status"], timestamp),
+            ("treasury_vault_eth", BASE_RPC_URL, str(base_data.get("vault_eth", 0)), base_data["status"], timestamp),
+            ("akash_node_status", AKASH_RPC_URL, json.dumps(akash_data), akash_data["status"], timestamp),
+            ("ledger_real_revenue_usdc", "local_sqlite", str(total_revenue), "ACTIVE", timestamp)
+        ]
+        
+        for key, src, val, stat, ts in metrics:
             cursor.execute('''
-                INSERT INTO anavai_twin_committee_log (twin_persona, hypothesis, simulated_score, status, timestamp)
+                INSERT OR REPLACE INTO anavai_telemetry_matrix (metric_key, source_endpoint, real_value, status, last_updated)
                 VALUES (?, ?, ?, ?, ?)
-            ''', (proposal["persona"], proposal["hypothesis"], proposal["score"], status, timestamp))
-            
-        conn.commit()
-    return injected_count, total_revenue
+            ''', (key, src, val, stat, ts))
 
-def run_anavai_cycle():
-    injected, revenue = run_multi_twin_committee()
-    timestamp = time.time()
-    
-    with sqlite3.connect(LEDGER_DB) as conn:
-        cursor = conn.cursor()
-        cursor.execute("SELECT COUNT(*) FROM anavai_strategy_matrix;")
-        total_strategies = cursor.fetchone()[0]
+        payload_str = json.dumps({
+            "node": NODE_ID,
+            "revenue_usdc": total_revenue,
+            "verified_requests": verified_reqs,
+            "base_l2": base_data,
+            "akash": akash_data,
+            "network_efficiency": network_efficiency
+        })
         
-    state = "YIELD_DRIVEN_MULTI_TWIN_SYNTHESIS"
-    payload = json.dumps({
-        "node": NODE_ID,
-        "engine": "ANAVAI-Yield-Multi-Twin-Matrix",
-        "accumulated_revenue_usdc": revenue,
-        "committee_injected_weights": injected,
-        "total_matrix_size": total_strategies,
-        "treasury": "0x0266c60Ba4F5B883d970300ca18ff598e77636D5"
-    })
-    
-    proof = hashlib.sha256(f"anavai-yield-{timestamp}-{payload}".encode()).hexdigest()
-    
-    with sqlite3.connect(LEDGER_DB) as conn:
-        cursor = conn.cursor()
+        proof = hashlib.sha256(f"anav-telemetry-{timestamp}-{payload_str}".encode()).hexdigest()
+
         cursor.execute('''
-            CREATE TABLE IF NOT EXISTS anavai_autonomous_log (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                timestamp REAL,
-                generation INTEGER,
-                agent_state TEXT,
-                decision_payload TEXT,
-                hash_proof TEXT
-            )
-        ''')
-        cursor.execute(
-            'INSERT INTO anavai_autonomous_log (timestamp, generation, agent_state, decision_payload, hash_proof) VALUES (?, ?, ?, ?, ?)',
-            (timestamp, int(timestamp % 10000), state, payload, proof)
-        )
+            INSERT INTO anavai_telemetry_audit_log (timestamp, total_revenue_usdc, base_gas_gwei, base_block_height, akash_status, hash_proof)
+            VALUES (?, ?, ?, ?, ?, ?)
+        ''', (timestamp, total_revenue, base_data.get("gas_gwei", 0), base_data.get("block_height", 0), akash_data["status"], proof))
+        
         conn.commit()
 
-    print(f"[ANAVAI YIELD COMMITTEE] Synthesis complete. Revenue: ${revenue:.3f} | Injected: {injected} | Matrix Size: {total_strategies} | Proof: {proof[:16]}")
+    print(f"[{time.strftime('%Y-%m-%d %H:%M:%S', time.localtime(timestamp))}] [TELEMETRY SYNC] Revenue: ${total_revenue:.4f} | Base Gas: {base_data.get('gas_gwei', 0):.2f} Gwei | Vault: {base_data.get('vault_eth', 0):.6f} ETH | Akash: {akash_data['status']} | Proof: {proof[:16]}")
 
 if __name__ == '__main__':
-    print("[ANAVAI] Initializing Yield-Driven Multi-Twin Committee Engine...")
-    initialize_multi_twin_db()
+    print("[ANAV] Initializing Real-World Telemetry & RPC Engine...")
+    initialize_telemetry_db()
     while True:
         try:
-            run_anavai_cycle()
+            execute_telemetry_poll()
         except Exception as e:
-            print(f"[ANAVAI Committee Error] {e}")
-        time.sleep(45)
+            print(f"[Telemetry Error] {e}")
+        time.sleep(60)
